@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact | Mavoko Boys School</title>
+    <meta name="description" content="Get in touch with Mavoko Boys School through phone, email, our contact form, office hours, and map placeholder." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="icon" type="image/png" href="images/branding/favicon.png" />
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div id="loader" aria-hidden="true">
+        <div class="loader-ring">
+            <div class="loader-logo-container">
+                <img src="images/branding/logo_placeholder.svg" alt="School Logo" class="loader-logo" />
+                <span class="loader-placeholder">📄 logo_placeholder.svg → /images/branding/</span>
+            </div>
+        </div>
+    </div>
+
+    <header class="site-header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main Navigation">
+            <div class="nav-brand">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-wrapper">
+                        <img src="images/branding/logo_placeholder.svg" alt="School Logo" class="site-logo" />
+                        <span class="logo-placeholder">📄 logo_placeholder.svg</span>
+                    </div>
+                    <span class="site-title">Mavoko Boys</span>
+                </a>
+            </div>
+
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+
+            <ul id="nav-menu" class="nav-menu" role="menubar">
+                <li role="none"><a href="index.html" role="menuitem">Home</a></li>
+                <li role="none"><a href="about.html" role="menuitem">About</a></li>
+                <li role="none"><a href="leadership.html" role="menuitem">Leadership</a></li>
+                <li role="none"><a href="academics.html" role="menuitem">Academics</a></li>
+                <li role="none"><a href="facilities.html" role="menuitem">Facilities</a></li>
+                <li role="none"><a href="admissions.html" role="menuitem">Admissions</a></li>
+                <li role="none"><a href="fees-payments.html" role="menuitem">Fees</a></li>
+                <li role="none"><a href="news.html" role="menuitem">News</a></li>
+                <li role="none"><a href="contact.html" role="menuitem" aria-current="page">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="sub-page-hero" aria-label="Contact page title">
+            <div class="sub-hero-background">
+                <img src="images/hero/contact-hero.jpg" alt="Contact hero image" class="sub-hero-image" />
+                <div class="sub-hero-placeholder">
+                    <span>📸 contact-hero.jpg</span>
+                    <small>/images/hero/</small>
+                </div>
+            </div>
+            <div class="sub-hero-overlay"></div>
+            <div class="sub-hero-content">
+                <div class="container">
+                    <h1 class="sub-hero-title">Contact Us</h1>
+                    <p class="sub-hero-subtitle">Reach out for admissions, general enquiries, and school visits.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section reveal" aria-labelledby="contact-info-title">
+            <div class="container">
+                <h2 id="contact-info-title" class="section-title">Contact Information</h2>
+                <div class="info-grid">
+                    <article class="info-card">
+                        <h3>Address</h3>
+                        <p>Mavoko Boys School, Athi River, Machakos County</p>
+                        <p>P.O. Box 561-00204, Athi River</p>
+                    </article>
+                    <article class="info-card">
+                        <h3>Phone</h3>
+                        <p>+254 XXX XXX XXX</p>
+                    </article>
+                    <article class="info-card">
+                        <h3>Email</h3>
+                        <p>info@mavokoboys.ac.ke</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section alt-section reveal" aria-labelledby="form-title">
+            <div class="container">
+                <div class="contact-layout">
+                    <div>
+                        <h2 id="form-title" class="section-title">Send a Message</h2>
+                        <form class="contact-form" name="contact" method="POST" data-netlify="true">
+                            <input type="hidden" name="form-name" value="contact" />
+                            <div class="form-row">
+                                <label for="name">Full Name</label>
+                                <input id="name" name="name" type="text" required />
+                            </div>
+                            <div class="form-row">
+                                <label for="email">Email Address</label>
+                                <input id="email" name="email" type="email" required />
+                            </div>
+                            <div class="form-row">
+                                <label for="subject">Subject</label>
+                                <input id="subject" name="subject" type="text" required />
+                            </div>
+                            <div class="form-row">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="6" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+                    </div>
+                    <div class="map-card">
+                        <h3>Google Map</h3>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.529758860052!2d36.98254957408181!3d-1.4562144358335882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f756541532b51%3A0x870f4012dde2f36d!2sMavoko%20Secondary%20School!5e0!3m2!1sen!2ske!4v1783970068119!5m2!1sen!2ske" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                        <h3>Office Hours</h3>
+                        <ul class="info-list">
+                            <li>Monday - Friday: 8:00 AM - 5:00 PM</li>
+                            <li>Saturday: 9:00 AM - 1:00 PM</li>
+                            <li>Sunday: Closed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo-wrapper">
+                        <img src="images/branding/logo_placeholder.svg" alt="School Logo" class="footer-logo" />
+                        <span class="footer-logo-placeholder">📄 logo_placeholder.svg → /images/branding/</span>
+                    </div>
+                    <h2>Mavoko Boys School</h2>
+                    <p>Athi River, Machakos County</p>
+                    <p>P.O. Box 561-00204, Athi River</p>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="fees-payments.html">Fees & Payments</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><span class="label">Phone:</span> <a href="tel:+254XXXXXXXXX">+254 XXX XXX XXX</a></p>
+                    <p><span class="label">Email:</span> <a href="mailto:info@mavokoboys.ac.ke">info@mavokoboys.ac.ke</a></p>
+                    <p><span class="label">Established:</span> 1990</p>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/p/Mavoko-High-School-100065352828914/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Mavoko Boys School. All rights reserved.</p>
+                <p class="developer-credit">Powered by <a href="https://kayntech.netlify.app/" target="_blank" rel="noopener noreferrer">KaynTech</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <span aria-hidden="true">↑</span>
+    </button>
+
+    <div id="scrollProgress" class="scroll-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <a href="https://wa.me/254XXXXXXXXX" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

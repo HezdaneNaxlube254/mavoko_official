@@ -1,0 +1,152 @@
+/* ========================================
+   1. LOADER ANIMATION
+   ======================================== */
+#loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-navy);
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.loader-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader-ring::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 3px solid rgba(242, 194, 48, 0.1);
+    border-radius: 50%;
+}
+
+.loader-ring::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 3px solid transparent;
+    border-top-color: var(--color-gold);
+    border-radius: 50%;
+    animation: spin 1.2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+.loader-logo {
+    width: 60px;
+    height: 60px;
+    z-index: 1;
+    animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.9);
+        opacity: 0.7;
+    }
+}
+
+/* ========================================
+   2. SCROLL REVEAL ANIMATIONS
+   ======================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger delays for grid children */
+.reveal-stagger > * {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.reveal-stagger.is-visible > *:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger.is-visible > *:nth-child(2) { transition-delay: 60ms; }
+.reveal-stagger.is-visible > *:nth-child(3) { transition-delay: 120ms; }
+.reveal-stagger.is-visible > *:nth-child(4) { transition-delay: 180ms; }
+.reveal-stagger.is-visible > *:nth-child(5) { transition-delay: 240ms; }
+.reveal-stagger.is-visible > *:nth-child(6) { transition-delay: 300ms; }
+.reveal-stagger.is-visible > *:nth-child(7) { transition-delay: 360ms; }
+.reveal-stagger.is-visible > *:nth-child(8) { transition-delay: 420ms; }
+.reveal-stagger.is-visible > *:nth-child(9) { transition-delay: 480ms; }
+.reveal-stagger.is-visible > *:nth-child(10) { transition-delay: 540ms; }
+.reveal-stagger.is-visible > *:nth-child(11) { transition-delay: 600ms; }
+.reveal-stagger.is-visible > *:nth-child(12) { transition-delay: 660ms; }
+.reveal-stagger.is-visible > *:nth-child(13) { transition-delay: 720ms; }
+.reveal-stagger.is-visible > *:nth-child(14) { transition-delay: 780ms; }
+.reveal-stagger.is-visible > *:nth-child(15) { transition-delay: 840ms; }
+.reveal-stagger.is-visible > *:nth-child(16) { transition-delay: 900ms; }
+
+/* ========================================
+   3. IMAGE REVEAL (CLIP MASK)
+   ======================================== */
+.image-reveal {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.image-reveal.is-visible {
+    clip-path: inset(0 0% 0 0);
+}
+
+/* ========================================
+   4. REDUCED MOTION OVERRIDE
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+    .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    
+    .reveal-stagger > * {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+    
+    .image-reveal {
+        clip-path: none;
+        transition: none;
+    }
+    
+    #loader {
+        transition: none;
+    }
+}
