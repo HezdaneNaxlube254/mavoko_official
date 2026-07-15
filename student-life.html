@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Life | Mavoko Boys' School</title>
+    <meta name="description" content="Discover student life at Mavoko Boys' School through houses, sports, clubs, and boarding and day schooling programs." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="icon" type="image/png" href="images/branding/favicon.png" />
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div id="loader" aria-hidden="true">
+        <div class="loader-ring">
+            <div class="loader-logo-container">
+                <img src="images/branding/logo_placeholder.svg" alt="School Logo" class="loader-logo" />
+                <span class="loader-placeholder">📄 logo_placeholder.svg → /images/branding/</span>
+            </div>
+        </div>
+    </div>
+
+    <header class="site-header" role="banner">
+        <nav class="nav-container" role="navigation" aria-label="Main Navigation">
+            <div class="nav-brand">
+                <a href="index.html" class="logo-link">
+                    <div class="logo-wrapper">
+                        <img src="images/branding/logo_placeholder.svg" alt="School Logo" class="site-logo" />
+                        <span class="logo-placeholder">📄 logo_placeholder.svg</span>
+                    </div>
+                    <span class="site-title">Mavoko Boys' School</span>
+                </a>
+            </div>
+
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Toggle navigation">
+                <span class="hamburger"></span>
+            </button>
+
+            <ul id="nav-menu" class="nav-menu" role="menubar">
+                <li role="none"><a href="index.html" role="menuitem">Home</a></li>
+                <li role="none"><a href="about.html" role="menuitem">About</a></li>
+                <li role="none"><a href="leadership.html" role="menuitem">Leadership</a></li>
+                <li role="none"><a href="academics.html" role="menuitem">Academics</a></li>
+                <li role="none"><a href="facilities.html" role="menuitem">Facilities</a></li>
+                <li role="none"><a href="admissions.html" role="menuitem">Admissions</a></li>
+                <li role="none"><a href="fees-payments.html" role="menuitem">Fees</a></li>
+                <li role="none"><a href="news.html" role="menuitem">News</a></li>
+                <li role="none"><a href="contact.html" role="menuitem">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="sub-page-hero" aria-label="Student life page title">
+            <div class="sub-hero-background">
+                <img src="images/hero/student-life-hero.jpg" alt="Student life hero image" class="sub-hero-image" />
+                <div class="sub-hero-placeholder">
+                    <span>📸 student-life-hero.jpg</span>
+                    <small>/images/hero/</small>
+                </div>
+            </div>
+            <div class="sub-hero-overlay"></div>
+            <div class="sub-hero-content">
+                <div class="container">
+                    <h1 class="sub-hero-title">Student Life</h1>
+                    <p class="sub-hero-subtitle">A vibrant learning environment with strong houses, sports, clubs, and structured boarding and day-schooling systems.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section reveal" aria-labelledby="houses-title">
+            <div class="container">
+                <h2 id="houses-title" class="section-title">Houses</h2>
+                <div class="page-content-card">
+                    <p>Sharmi House — Yellow</p>
+                    <p>Ndeti House — Blue</p>
+                    <p>Chris Yarinakis House — Red</p>
+                    <p>Maina House — Green</p>
+                </div>
+                <div class="gallery-wrapper">
+                    <div class="gallery-carousel">
+                        <div class="gallery-track">
+                            <div class="gallery-slide center" data-index="0">
+                                <img src="images/gallery/houses_01.jpg" alt="Sharmi House" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 houses_01.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Sharmi House</div>
+                            </div>
+                            <div class="gallery-slide left" data-index="1">
+                                <img src="images/gallery/houses_02.jpg" alt="Ndeti House" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 houses_02.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Ndeti House</div>
+                            </div>
+                            <div class="gallery-slide right" data-index="2">
+                                <img src="images/gallery/houses_03.jpg" alt="Chris Yarinakis House" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 houses_03.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Chris Yarinakis House</div>
+                            </div>
+                            <div class="gallery-slide" data-index="3">
+                                <img src="images/gallery/houses_04.jpg" alt="Maina House" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 houses_04.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Maina House</div>
+                            </div>
+                        </div>
+                        <div class="gallery-nav">
+                            <button class="gallery-btn gallery-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+                            <div class="gallery-dots">
+                                <span class="gallery-dot active" data-index="0"></span>
+                                <span class="gallery-dot" data-index="1"></span>
+                                <span class="gallery-dot" data-index="2"></span>
+                                <span class="gallery-dot" data-index="3"></span>
+                            </div>
+                            <button class="gallery-btn gallery-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section alt-section reveal" aria-labelledby="sports-title">
+            <div class="container">
+                <h2 id="sports-title" class="section-title">Sports</h2>
+                <div class="page-content-card">
+                    <p>Rugby, Handball, Hockey, Volleyball, Basketball, Soccer, Table Tennis, Badminton, Lawn Tennis, Athletics</p>
+                </div>
+                <div class="gallery-wrapper">
+                    <div class="gallery-carousel">
+                        <div class="gallery-track">
+                            <div class="gallery-slide center" data-index="0">
+                                <img src="images/gallery/sports_01.jpg" alt="Rugby" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 sports_01.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Rugby</div>
+                            </div>
+                            <div class="gallery-slide left" data-index="1">
+                                <img src="images/gallery/sports_02.jpg" alt="Football" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 sports_02.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Football</div>
+                            </div>
+                            <div class="gallery-slide right" data-index="2">
+                                <img src="images/gallery/sports_03.jpg" alt="Athletics" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 sports_03.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Athletics</div>
+                            </div>
+                            <div class="gallery-slide" data-index="3">
+                                <img src="images/gallery/sports_04.jpg" alt="Volleyball" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 sports_04.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Volleyball</div>
+                            </div>
+                        </div>
+                        <div class="gallery-nav">
+                            <button class="gallery-btn gallery-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+                            <div class="gallery-dots">
+                                <span class="gallery-dot active" data-index="0"></span>
+                                <span class="gallery-dot" data-index="1"></span>
+                                <span class="gallery-dot" data-index="2"></span>
+                                <span class="gallery-dot" data-index="3"></span>
+                            </div>
+                            <button class="gallery-btn gallery-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section reveal" aria-labelledby="clubs-title">
+            <div class="container">
+                <h2 id="clubs-title" class="section-title">Clubs & Societies</h2>
+                <div class="page-content-card">
+                    <p>Drama Club, Music Club, Mathematics Club, Scouts Movement, Library Club, Christian Union, Young Christian Society, Muslim Society, Kenya Science & Engineering Fair (KSEF) participation</p>
+                </div>
+                <div class="gallery-wrapper">
+                    <div class="gallery-carousel">
+                        <div class="gallery-track">
+                            <div class="gallery-slide center" data-index="0">
+                                <img src="images/gallery/clubs_01.jpg" alt="Drama Club" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 clubs_01.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Drama Club</div>
+                            </div>
+                            <div class="gallery-slide left" data-index="1">
+                                <img src="images/gallery/clubs_02.jpg" alt="Music Club" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 clubs_02.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Music Club</div>
+                            </div>
+                            <div class="gallery-slide right" data-index="2">
+                                <img src="images/gallery/clubs_03.jpg" alt="Scouts Movement" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 clubs_03.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">Scouts Movement</div>
+                            </div>
+                            <div class="gallery-slide" data-index="3">
+                                <img src="images/gallery/clubs_04.jpg" alt="KSEF activity" loading="lazy" />
+                                <div class="gallery-placeholder">
+                                    <span>📸 clubs_04.jpg</span>
+                                    <small>/images/gallery/</small>
+                                </div>
+                                <div class="gallery-slide-label">KSEF</div>
+                            </div>
+                        </div>
+                        <div class="gallery-nav">
+                            <button class="gallery-btn gallery-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
+                            <div class="gallery-dots">
+                                <span class="gallery-dot active" data-index="0"></span>
+                                <span class="gallery-dot" data-index="1"></span>
+                                <span class="gallery-dot" data-index="2"></span>
+                                <span class="gallery-dot" data-index="3"></span>
+                            </div>
+                            <button class="gallery-btn gallery-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section alt-section reveal" aria-labelledby="boarding-title">
+            <div class="container">
+                <h2 id="boarding-title" class="section-title">Boarding & Day Schooling</h2>
+                <div class="info-grid">
+                    <article class="info-card">
+                        <h3>Day Schooling</h3>
+                        <p>Majority of the student population; the department manages safe, orderly entry and departure of day scholars each school day.</p>
+                    </article>
+                    <article class="info-card">
+                        <h3>Boarding</h3>
+                        <p>Dormitory built with NG-CDF support. Meal structure includes breakfast, mid-morning porridge, lunch, and supper.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="footer-logo-wrapper">
+                        <img src="images/branding/logo_placeholder.svg" alt="School Logo" class="footer-logo" />
+                        <span class="footer-logo-placeholder">📄 logo_placeholder.svg → /images/branding/</span>
+                    </div>
+                    <h2>Mavoko Boys' School</h2>
+                    <p>Athi River, Machakos County</p>
+                    <p>P.O. Box 561-00204, Athi River</p>
+                </div>
+
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="fees-payments.html">Fees & Payments</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h3>Contact</h3>
+                    <p><span class="label">Phone:</span> <a href="tel:+254XXXXXXXXX">+254 XXX XXX XXX</a></p>
+                    <p><span class="label">Email:</span> <a href="mailto:info@mavokoboys.ac.ke">info@mavokoboys.ac.ke</a></p>
+                    <p><span class="label">Established:</span> 1990</p>
+                    <div class="social-links">
+                        <a href="https://web.facebook.com/p/Mavoko-High-School-100065352828914/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="LinkedIn" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> Mavoko Boys' School. All rights reserved.</p>
+                <p class="developer-credit">Powered by <a href="https://kayntech.netlify.app/" target="_blank" rel="noopener noreferrer">KaynTech</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">
+        <span aria-hidden="true">↑</span>
+    </button>
+
+    <div id="scrollProgress" class="scroll-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+
+    <a href="https://wa.me/254XXXXXXXXX" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Contact us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/main.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

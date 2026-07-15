@@ -56,6 +56,7 @@
     </header>
 
     <main id="main-content">
+        <!-- HERO SECTION WITH PLACEHOLDER SYSTEM -->
         <section class="sub-page-hero" aria-label="Admissions page title">
             <div class="sub-hero-background">
                 <img src="images/hero/admissions-hero.jpg" alt="Admissions hero image" class="sub-hero-image" />
@@ -77,7 +78,7 @@
             <div class="container">
                 <h2 id="period-title" class="section-title">Admission Period</h2>
                 <div class="page-content-card">
-                    <p>January, and 2 terms after interview</p>
+                    <p>January intake; and any other time after student passes interview.</p>
                 </div>
             </div>
         </section>
@@ -92,23 +93,22 @@
                         <button class="tab-button" role="tab" aria-selected="false" data-tab="fees">Fees</button>
                     </div>
                     <div class="tab-panel active" id="requirements" role="tabpanel">
-                        <ul class="info-list">
-                            <li>Medical fitness certificate</li>
-                            <li>2 passport photos in school uniform</li>
-                            <li>Stationery/necessities (biro pens, padlocks)</li>
-                            <li>Birth certificate copy</li>
-                            <li>KCSE result slip copy</li>
-                            <li>Student ID fee (KES 150)</li>
-                            <li>7 exercise books</li>
-                            <li>1 ream photocopy paper (JK Copier 80gsm A4)</li>
-                            <li>School uniform (confirm before purchase)</li>
-                            <li>Games uniform</li>
-                        </ul>
+                        <p>We welcome your child to join our school community any time. To begin the admission process, please ensure you have:</p>
+                        <p><strong>1. Certificate of medical fitness</strong> — confirming your child is in good health to participate in school activities.</p>
+                        <p><strong>2. Two passport-size photographs</strong> — taken at school while in proper school uniform.</p>
+                        <p><strong>3. Basic necessities</strong> — including biro pens, padlocks, and personal items for daily use.</p>
+                        <p><strong>4. Birth certificate</strong> — a copy of your child's birth certificate for official records.</p>
+                        <p><strong>5. KCPE/KJSEA result slip</strong> — a copy from the previous level.</p>
+                        <p><strong>6. Student ID fee</strong> — KES 150 for school identification.</p>
+                        <p><strong>7. Exercise books</strong> — seven exercise books for various subjects.</p>
+                        <p><strong>8. Photocopying paper</strong> — one ream of photocopying paper (80gsm A4) for school use.</p>
+                        <p><strong>9. School uniform</strong> — please confirm exact requirements with the school before making any purchases.</p>
+                        <p><strong>10. Games uniform</strong> — for physical education and sports activities.</p>
                     </div>
                     <div class="tab-panel" id="documents" role="tabpanel">
                         <ul class="check-list">
                             <li><i class="fas fa-check"></i> Birth certificate copy</li>
-                            <li><i class="fas fa-check"></i> KCSE result slip copy</li>
+                            <li><i class="fas fa-check"></i> KCPE/KJSEA result slip copy</li>
                             <li><i class="fas fa-check"></i> Medical fitness certificate</li>
                             <li><i class="fas fa-check"></i> 2 passport photos in school uniform</li>
                             <li><i class="fas fa-check"></i> Filled admission form</li>
@@ -116,8 +116,9 @@
                     </div>
                     <div class="tab-panel" id="fees" role="tabpanel">
                         <ul class="info-list">
-                            <li>Day Scholars: KES 8,250 (confirmed)</li>
-                            <li>Boarders: [To be confirmed by bursar]</li>
+                            <li><strong>Day Scholars:</strong> KES 8,250 (confirmed)</li>
+                            <li><strong>Boarders:</strong> [To be confirmed by bursar]</li>
+                            <li><em>Payment method: Bank transfer (no M-Pesa paybill active — confirm with school).</em></li>
                         </ul>
                     </div>
                 </div>
@@ -144,9 +145,12 @@
             <div class="container">
                 <h2 id="contact-admissions-title" class="section-title">Contact Admissions</h2>
                 <div class="page-content-card centered-card">
-                    <p>For admission enquiries, please contact the admissions office.</p>
-                    <p><strong>Phone:</strong> +254 XXX XXX XXX</p>
-                    <p><strong>Email:</strong> info@mavokoboys.ac.ke</p>
+                    <p>Ready to enroll your child? Contact us today to begin the journey of excellence at Mavoko Boys' School.</p>
+                    <p><strong>Phone:</strong> 0700 000 000 (Placeholder - to be replaced)</p>
+                    <p><strong>Email:</strong> mavokosecondary@gmail.com</p>
+                    <div class="enroll-cta">
+                        <a href="mailto:mavokosecondary@gmail.com?subject=Admission%20Inquiry" class="btn btn-primary">Enroll Today</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -210,5 +214,49 @@
     <script src="js/main.js"></script>
     <script src="js/carousel.js"></script>
     <script src="js/animations.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero placeholder handler
+            const heroImg = document.querySelector('.sub-hero-image');
+            const heroPlaceholder = document.querySelector('.sub-hero-placeholder');
+            if (heroImg && heroPlaceholder) {
+                const testImg = new Image();
+                testImg.onload = function() {
+                    heroImg.style.display = 'block';
+                    heroPlaceholder.style.display = 'none';
+                };
+                testImg.onerror = function() {
+                    heroImg.style.display = 'none';
+                    heroPlaceholder.style.display = 'flex';
+                };
+                if (heroImg.src && heroImg.src !== '') {
+                    testImg.src = heroImg.src;
+                } else {
+                    heroImg.style.display = 'none';
+                    heroPlaceholder.style.display = 'flex';
+                }
+            }
+
+            // Tabs
+            document.querySelectorAll('.tab-button').forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+                    const parent = this.closest('.tabs-card');
+
+                    if (!parent) return;
+
+                    parent.querySelectorAll('.tab-button').forEach(function(tab) {
+                        tab.classList.toggle('active', tab === button);
+                        tab.setAttribute('aria-selected', String(tab === button));
+                    });
+
+                    parent.querySelectorAll('.tab-panel').forEach(function(panel) {
+                        panel.classList.toggle('active', panel.id === tabName);
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>

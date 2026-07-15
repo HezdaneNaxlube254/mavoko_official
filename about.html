@@ -59,15 +59,20 @@
     </header>
 
     <main id="main-content">
+        <!-- HERO SECTION - SAME SYSTEM AS HOMEPAGE -->
         <section class="sub-page-hero" aria-label="About page title">
+            <!-- Hero Background with Image - SAME as homepage hero -->
             <div class="sub-hero-background">
-                <img src="images/hero/about-hero.jpg" alt="About Mavoko Boys School hero image" class="sub-hero-image" />
+                <img src="images/hero/about-hero.jpg" alt="About Mavoko Boys School" class="sub-hero-image" />
+                <!-- PLACEHOLDER - shows when image NOT uploaded - SAME as homepage -->
                 <div class="sub-hero-placeholder">
                     <span>📸 about-hero.jpg</span>
                     <small>/images/hero/</small>
                 </div>
             </div>
+            <!-- Blue Overlay - SAME as homepage -->
             <div class="sub-hero-overlay"></div>
+            <!-- Content on top - SAME as homepage -->
             <div class="sub-hero-content">
                 <div class="container">
                     <h1 class="sub-hero-title">About Us</h1>
@@ -76,11 +81,14 @@
             </div>
         </section>
 
+        <!-- REST OF THE PAGE REMAINS THE SAME -->
         <section class="page-section reveal" aria-labelledby="story-title">
             <div class="container">
                 <h2 id="story-title" class="section-title">Our Story</h2>
                 <div class="page-content-card">
-                    <p>Mavoko Boys School was established in 1990 with a vision to provide quality education for national development. Located in Athi River, Machakos County, the school has grown to become a leading institution serving the community with dedication and excellence.</p>
+                    <p>Mavoko Boys' School was established in 1990 as a mixed day school, beginning in a single building with a handful of students. Over the decades, the school has grown into a thriving institution with modern infrastructure, serving both day scholars and boarders from Athi River, Machakos County and beyond.</p>
+                    <p>Today, Mavoko Boys' School is home to 759 students supported by 47 teaching staff. The school is currently transitioning from the 8-4-4 system to the Competency-Based Curriculum (CBC), reflecting Kenya's national curriculum reform, while continuing to deliver strong results under KCSE for its senior classes.</p>
+                    <p>The school has built a reputation for academic performance, strong co-curricular participation in sports and clubs, and a disciplined, values-driven learning environment. Guided by our motto, "Serve and Excel," Mavoko Boys' School remains committed to producing well-rounded graduates equipped for further education and responsible citizenship.</p>
                 </div>
             </div>
         </section>
@@ -91,7 +99,7 @@
                 <div class="info-grid">
                     <article class="info-card">
                         <h3>Vision</h3>
-                        <p>A leading institution in the provision of quality education for national development</p>
+                        <p>To be a leading institution in the provision of quality education for national development</p>
                     </article>
                     <article class="info-card">
                         <h3>Mission</h3>
@@ -101,6 +109,16 @@
                         <h3>Motto</h3>
                         <p>"Serve and Excel"</p>
                     </article>
+                </div>
+
+                <div class="page-content-card quick-facts-card">
+                    <h3>Quick Facts</h3>
+                    <p>Mavoko Senior School operates as a Senior School within the Competency Based Curriculum. Students transition from Junior School to specialize in one of the main pathways:</p>
+                    <ul class="info-list">
+                        <li><strong>STEM:</strong> Science, Technology, Engineering, and Mathematics</li>
+                        <li><strong>Social Sciences:</strong> Humanities and Business Studies</li>
+                        <li><strong>Arts & Sports:</strong> Performing/Visual Arts and Physical Education</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -140,6 +158,8 @@
                         <h3>Registered</h3>
                         <p>Registered with the Ministry of Education (MoE)</p>
                         <p><strong>Established:</strong> 1990</p>
+                        <p><strong>Type:</strong> Senior Public secondary school for boys, Boarding & Day</p>
+                        <p><strong>Curriculum:</strong> Transitioning from 8-4-4 to CBC (Competency-Based Curriculum)</p>
                     </div>
                 </div>
             </div>
@@ -237,5 +257,33 @@
     <script src="js/main.js"></script>
     <script src="js/carousel.js"></script>
     <script src="js/animations.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle sub-hero image placeholder - SAME as homepage
+            const heroImg = document.querySelector('.sub-hero-image');
+            const heroPlaceholder = document.querySelector('.sub-hero-placeholder');
+            
+            if (heroImg && heroPlaceholder) {
+                // Check if image exists
+                const testImg = new Image();
+                testImg.onload = function() {
+                    heroImg.style.display = 'block';
+                    heroPlaceholder.style.display = 'none';
+                };
+                testImg.onerror = function() {
+                    heroImg.style.display = 'none';
+                    heroPlaceholder.style.display = 'flex';
+                };
+                
+                if (heroImg.src && heroImg.src !== '') {
+                    testImg.src = heroImg.src;
+                } else {
+                    heroImg.style.display = 'none';
+                    heroPlaceholder.style.display = 'flex';
+                }
+            }
+        });
+    </script>
 </body>
 </html>

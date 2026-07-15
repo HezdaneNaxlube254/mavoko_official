@@ -371,134 +371,117 @@ document.addEventListener('DOMContentLoaded', function() {
 // 8. GALLERY CAROUSEL
 // ========================================
 document.addEventListener('DOMContentLoaded', function() {
-    const track = document.querySelector('.gallery-track');
-    const slides = document.querySelectorAll('.gallery-slide');
-    const dots = document.querySelectorAll('.gallery-dot');
-    const prevBtn = document.querySelector('.gallery-prev');
-    const nextBtn = document.querySelector('.gallery-next');
-    
-    if (!track || slides.length === 0) return;
-    
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-    let autoPlayInterval = null;
-    const AUTO_PLAY_DELAY = 4000; // 4 seconds
-    
-    // Check for reduced motion
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    // Function to update gallery positions
-    function updateGallery(index) {
-        // Remove all position classes
-        slides.forEach(function(slide) {
-            slide.classList.remove('center', 'left', 'right', 'hidden-left', 'hidden-right');
-        });
+    document.querySelectorAll('.gallery-carousel').forEach(function(carousel) {
+        const track = carousel.querySelector('.gallery-track');
+        const slides = carousel.querySelectorAll('.gallery-slide');
+        const dots = carousel.querySelectorAll('.gallery-dot');
+        const prevBtn = carousel.querySelector('.gallery-prev');
+        const nextBtn = carousel.querySelector('.gallery-next');
         
-        // Calculate positions
-        const centerIndex = index;
-        const leftIndex = (index - 1 + totalSlides) % totalSlides;
-        const rightIndex = (index + 1) % totalSlides;
-        const hiddenLeftIndex = (index - 2 + totalSlides) % totalSlides;
-        const hiddenRightIndex = (index + 2) % totalSlides;
+        if (!track || slides.length === 0) return;
         
-        // Assign classes
-        slides[centerIndex].classList.add('center');
-        slides[leftIndex].classList.add('left');
-        slides[rightIndex].classList.add('right');
-        slides[hiddenLeftIndex].classList.add('hidden-left');
-        slides[hiddenRightIndex].classList.add('hidden-right');
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        let autoPlayInterval = null;
+        const AUTO_PLAY_DELAY = 4000; // 4 seconds
         
-        // Update dots
-        dots.forEach(function(dot, i) {
-            dot.classList.toggle('active', i === index);
-        });
+        // Check for reduced motion
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
-        currentIndex = index;
-    }
-    
-    // Next slide
-    function nextSlide() {
-        const next = (currentIndex + 1) % totalSlides;
-        updateGallery(next);
-    }
-    
-    // Previous slide
-    function prevSlide() {
-        const prev = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateGallery(prev);
-    }
-    
-    // Go to specific slide
-    function goToSlide(index) {
-        updateGallery(index);
-        resetAutoPlay();
-    }
-    
-    // Auto-play functions
-    function startAutoPlay() {
-        if (prefersReducedMotion) return;
-        if (autoPlayInterval) clearInterval(autoPlayInterval);
-        autoPlayInterval = setInterval(nextSlide, AUTO_PLAY_DELAY);
-    }
-    
-    function stopAutoPlay() {
-        if (autoPlayInterval) {
-            clearInterval(autoPlayInterval);
-            autoPlayInterval = null;
+        // Function to update gallery positions
+        function updateGallery(index) {
+            slides.forEach(function(slide) {
+                slide.classList.remove('center', 'left', 'right', 'hidden-left', 'hidden-right');
+            });
+            
+            const centerIndex = index;
+            const leftIndex = (index - 1 + totalSlides) % totalSlides;
+            const rightIndex = (index + 1) % totalSlides;
+            const hiddenLeftIndex = (index - 2 + totalSlides) % totalSlides;
+            const hiddenRightIndex = (index + 2) % totalSlides;
+            
+            slides[centerIndex].classList.add('center');
+            slides[leftIndex].classList.add('left');
+            slides[rightIndex].classList.add('right');
+            slides[hiddenLeftIndex].classList.add('hidden-left');
+            slides[hiddenRightIndex].classList.add('hidden-right');
+            
+            dots.forEach(function(dot, i) {
+                dot.classList.toggle('active', i === index);
+            });
+            
+            currentIndex = index;
         }
-    }
-    
-    function resetAutoPlay() {
-        stopAutoPlay();
-        startAutoPlay();
-    }
-    
-    // Event listeners
-    if (prevBtn) {
-        prevBtn.addEventListener('click', function() {
-            prevSlide();
-            resetAutoPlay();
-        });
-    }
-    
-    if (nextBtn) {
-        nextBtn.addEventListener('click', function() {
-            nextSlide();
-            resetAutoPlay();
-        });
-    }
-    
-    // Dot navigation
-    dots.forEach(function(dot, index) {
-        dot.addEventListener('click', function() {
-            goToSlide(index);
-        });
-    });
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        const gallery = document.querySelector('.gallery-carousel');
-        if (!gallery) return;
         
-        // Check if gallery is in viewport
-        const rect = gallery.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
-        if (!isVisible) return;
+        function nextSlide() {
+            const next = (currentIndex + 1) % totalSlides;
+            updateGallery(next);
+        }
         
-        if (e.key === 'ArrowLeft') {
-            e.preventDefault();
-            prevSlide();
-            resetAutoPlay();
-        } else if (e.key === 'ArrowRight') {
-            e.preventDefault();
-            nextSlide();
+        function prevSlide() {
+            const prev = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateGallery(prev);
+        }
+        
+        function goToSlide(index) {
+            updateGallery(index);
             resetAutoPlay();
         }
-    });
-    
-    // Pause on hover
-    const carousel = document.querySelector('.gallery-carousel');
-    if (carousel) {
+        
+        function startAutoPlay() {
+            if (prefersReducedMotion) return;
+            if (autoPlayInterval) clearInterval(autoPlayInterval);
+            autoPlayInterval = setInterval(nextSlide, AUTO_PLAY_DELAY);
+        }
+        
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+        }
+        
+        function resetAutoPlay() {
+            stopAutoPlay();
+            startAutoPlay();
+        }
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function() {
+                prevSlide();
+                resetAutoPlay();
+            });
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+                nextSlide();
+                resetAutoPlay();
+            });
+        }
+        
+        dots.forEach(function(dot, index) {
+            dot.addEventListener('click', function() {
+                goToSlide(index);
+            });
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            const rect = carousel.getBoundingClientRect();
+            const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+            if (!isVisible) return;
+            
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+                resetAutoPlay();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                nextSlide();
+                resetAutoPlay();
+            }
+        });
+        
         carousel.addEventListener('mouseenter', function() {
             stopAutoPlay();
         });
@@ -507,7 +490,6 @@ document.addEventListener('DOMContentLoaded', function() {
             startAutoPlay();
         });
         
-        // Touch support - pause on touch
         carousel.addEventListener('touchstart', function() {
             stopAutoPlay();
         });
@@ -515,38 +497,35 @@ document.addEventListener('DOMContentLoaded', function() {
         carousel.addEventListener('touchend', function() {
             startAutoPlay();
         });
-    }
-    
-    // Initialize gallery
-    updateGallery(0);
-    
-    // Start auto-play if not reduced motion
-    if (!prefersReducedMotion) {
-        startAutoPlay();
-    }
-    
-    // Handle gallery image placeholders
-    document.querySelectorAll('.gallery-slide').forEach(function(slide) {
-        const img = slide.querySelector('img');
-        const placeholder = slide.querySelector('.gallery-placeholder');
         
-        if (img && placeholder) {
-            const testImg = new Image();
-            testImg.onload = function() {
-                img.style.display = 'block';
-                placeholder.style.display = 'none';
-            };
-            testImg.onerror = function() {
-                img.style.display = 'none';
-                placeholder.style.display = 'flex';
-            };
-            
-            if (img.src && img.src !== '') {
-                testImg.src = img.src;
-            } else {
-                img.style.display = 'none';
-                placeholder.style.display = 'flex';
-            }
+        updateGallery(0);
+        
+        if (!prefersReducedMotion) {
+            startAutoPlay();
         }
+        
+        slides.forEach(function(slide) {
+            const img = slide.querySelector('img');
+            const placeholder = slide.querySelector('.gallery-placeholder');
+            
+            if (img && placeholder) {
+                const testImg = new Image();
+                testImg.onload = function() {
+                    img.style.display = 'block';
+                    placeholder.style.display = 'none';
+                };
+                testImg.onerror = function() {
+                    img.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                };
+                
+                if (img.src && img.src !== '') {
+                    testImg.src = img.src;
+                } else {
+                    img.style.display = 'none';
+                    placeholder.style.display = 'flex';
+                }
+            }
+        });
     });
 });

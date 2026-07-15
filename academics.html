@@ -56,6 +56,7 @@
     </header>
 
     <main id="main-content">
+        <!-- HERO SECTION WITH PLACEHOLDER SYSTEM -->
         <section class="sub-page-hero" aria-label="Academics page title">
             <div class="sub-hero-background">
                 <img src="images/hero/academics-hero.jpg" alt="Academics hero image" class="sub-hero-image" />
@@ -77,8 +78,8 @@
             <div class="container">
                 <h2 id="curriculum-title" class="section-title">Curriculum Overview</h2>
                 <div class="page-content-card">
-                    <p>Kenya Certificate of Secondary Education (KCSE)</p>
-                    <p>The school offers a well-balanced curriculum designed to prepare learners for national examinations, higher education, and life beyond school.</p>
+                    <p>Mavoko Boys' School offers a structured curriculum that prepares learners for national examinations, further education, and responsible citizenship.</p>
+                    <p>The school is currently transitioning from the 8-4-4 system to the Competency-Based Curriculum (CBC), supporting a more skills-based and learner-centered approach.</p>
                 </div>
             </div>
         </section>
@@ -87,12 +88,12 @@
             <div class="container">
                 <h2 id="subjects-title" class="section-title">Subject Offerings</h2>
                 <div class="info-grid">
-                    <article class="info-card"><h3>Sciences</h3><p>Biology, Chemistry, Physics</p></article>
-                    <article class="info-card"><h3>Humanities</h3><p>History, Geography, Christian Religious Education</p></article>
-                    <article class="info-card"><h3>Languages</h3><p>English, Kiswahili, French (optional)</p></article>
-                    <article class="info-card"><h3>Technical</h3><p>Computer Studies, Agriculture</p></article>
-                    <article class="info-card"><h3>Business</h3><p>Business Studies</p></article>
-                    <article class="info-card"><h3>Mathematics</h3><p>Mathematics</p></article>
+                    <article class="info-card"><h3>Languages</h3><p>English and Kiswahili are both compulsory and examinable, with a focus on communication skills and cultural literacy.</p></article>
+                    <article class="info-card"><h3>Mathematics</h3><p>Strong exam technique, ICT integration, and structured support to close performance gaps through group discussion and peer teaching.</p></article>
+                    <article class="info-card"><h3>Sciences</h3><p>Biology, Chemistry, and Physics are taught across dedicated laboratories, preparing students for STEM pathways including medicine and engineering.</p></article>
+                    <article class="info-card"><h3>Humanities</h3><p>CRE, History & Government, and Geography build critical thinking and civic understanding.</p></article>
+                    <article class="info-card"><h3>Technical / Home Science</h3><p>Home Science, Computer Studies, Agriculture, and Business Studies provide strong practical, hands-on learning opportunities.</p></article>
+                    <article class="info-card"><h3>Careers</h3><p>The careers department guides subject selection, organizes university exposure trips, and supports post-KCSE placement guidance.</p></article>
                 </div>
             </div>
         </section>
@@ -126,8 +127,10 @@
         <section class="page-section reveal" aria-labelledby="achievements-title">
             <div class="container">
                 <h2 id="achievements-title" class="section-title">Academic Achievements</h2>
-                <div class="page-content-card">
-                    <p>Pending - awaiting Dean's input</p>
+                <div class="page-content-card" style="border-left: 4px solid var(--color-gold);">
+                    <p><strong>Computer Studies</strong> has consistently been the top-performing subject, sustaining a mean of 9.0+ (B+) across recent years.</p>
+                    <p><strong>2025 KSEF</strong> (Kenya Science and Engineering Fair) National Qualifiers.</p>
+                    <p style="margin-top: var(--spacing-md);"><strong>KCSE Performance:</strong> Strong KCSE performance in 2022 and 2023, among the school's best academic years. A large number of Class of 2023 graduates proceeded to university.</p>
                 </div>
             </div>
         </section>
@@ -203,5 +206,30 @@
     <script src="js/main.js"></script>
     <script src="js/carousel.js"></script>
     <script src="js/animations.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hero placeholder handler
+            const heroImg = document.querySelector('.sub-hero-image');
+            const heroPlaceholder = document.querySelector('.sub-hero-placeholder');
+            if (heroImg && heroPlaceholder) {
+                const testImg = new Image();
+                testImg.onload = function() {
+                    heroImg.style.display = 'block';
+                    heroPlaceholder.style.display = 'none';
+                };
+                testImg.onerror = function() {
+                    heroImg.style.display = 'none';
+                    heroPlaceholder.style.display = 'flex';
+                };
+                if (heroImg.src && heroImg.src !== '') {
+                    testImg.src = heroImg.src;
+                } else {
+                    heroImg.style.display = 'none';
+                    heroPlaceholder.style.display = 'flex';
+                }
+            }
+        });
+    </script>
 </body>
 </html>
