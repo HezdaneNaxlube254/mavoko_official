@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Replace XXXXXXXXX with actual phone number
         // Format: country code + number without + sign
         // Example: 254712345678
-        const phoneNumber = '254XXXXXXXXX';
+        const phoneNumber = '254768453189';
         whatsappBtn.href = `https://wa.me/${phoneNumber}`;
     }
 });
