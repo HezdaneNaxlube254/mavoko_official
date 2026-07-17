@@ -1,0 +1,39 @@
+hero_image: "/images/hero/academics-hero.jpg"
+hero_subtitle: "A structured KCSE curriculum with academic guidance, practical learning, and strong student support."
+curriculum_overview: |
+  Mavoko Boys' School is a C4 school under the new CBE curriculum offering a structured curriculum that prepares learners for national examinations, further education, and responsible citizenship.
+
+  The school is currently transitioning from the 8-4-4 system to the Competency-Based Education (CBE), supporting a more skills-based and learner-centered approach.
+subjects:
+  - name: "Languages"
+    description: "English and Kiswahili are both compulsory and examinable, with a focus on communication skills and cultural literacy."
+  - name: "Mathematics"
+    description: "Strong exam technique, ICT integration, and structured support to close performance gaps through group discussion and peer teaching."
+  - name: "Sciences"
+    description: "Biology, Chemistry, and Physics are taught across dedicated laboratories, preparing students for STEM pathways including medicine and engineering."
+  - name: "Humanities"
+    description: "CRE, History & Government, and Geography build critical thinking and civic understanding."
+  - name: "Technical / Home Science"
+    description: "Home Science, Computer Studies, Agriculture, and Business Studies provide strong practical, hands-on learning opportunities."
+  - name: "Careers"
+    description: "The careers department guides subject selection, organizes university exposure trips, and supports post-KCSE placement guidance."
+calendar: "- Coming soon"
+facilities_text: |
+  We have well equipped spacious classrooms to give our learners a conducive learning environment.
+
+  We are equipped with two science laboratories and one ICT laboratory to not only promote learning but also innovation amongst our learners.
+achievements: |
+  **Computer Studies** has consistently been the top-performing subject, sustaining a mean of 9.0+ (B+) across recent years.
+
+  **2025 KSEF** (Kenya Science and Engineering Fair) National Qualifiers.
+
+  **KCSE Performance:** Strong KCSE performance in 2022 and 2023, among the school's best academic years. A large number of Class of 2023 graduates proceeded to university.
+support_programs:
+  - name: "Remedial Classes"
+    description: "Remedial classes for struggling students"
+  - name: "Guidance and Counseling"
+    description: "Guidance and counseling services"
+  - name: "Library"
+    description: ""
+  - name: "Career Guidance"
+    description: "Career guidance and mentorship"

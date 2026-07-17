@@ -1,0 +1,34 @@
+hero_image: "/images/hero/admissions-hero.jpg"
+hero_subtitle: "Admissions are open for January and two terms after interview, with clear requirements and a simple application process."
+period: "January intake; and any other time after student passes interview."
+requirements: |
+  We welcome your child to join our school community any time. To begin the admission process, please ensure you have:
+
+  1. **Certificate of medical fitness** — confirming your child is in good health to participate in school activities.
+  2. **Two passport-size photographs** — taken at school while in proper school uniform.
+  3. **Basic necessities** — including biro pens, padlocks, and personal items for daily use.
+  4. **Birth certificate** — a copy of your child's birth certificate for official records.
+  5. **KCPE/KJSEA result slip** — a copy from the previous level.
+  6. **Student ID fee** — KES 150 for school identification.
+  7. **Exercise books** — seven exercise books for various subjects.
+  8. **Photocopying paper** — one ream of photocopying paper (80gsm A4) for school use.
+  9. **School uniform** — please confirm exact requirements with the school before making any purchases.
+  10. **Games uniform** — for physical education and sports activities.
+documents:
+  - "Birth certificate copy"
+  - "KCPE/KJSEA result slip copy"
+  - "Medical fitness certificate"
+  - "2 passport photos in school uniform"
+  - "Filled admission form"
+fees_tab: |
+  - We offer different fee structures at school depending on whether you are a boarder or day scholar. Visit our school for more info.
+  - *Payment method: Our fees is paid through the bank. For more information confirm with the school to avoid inconveniences.*
+checklist:
+  - "Obtain and fill admission form"
+  - "Submit required documents"
+  - "Attend interview"
+  - "Receive admission letter"
+  - "Pay fees"
+  - "Report to school"
+admissions_phone: "+254768453189"
+admissions_email: "mavokosec@gmail.com"

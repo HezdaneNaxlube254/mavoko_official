@@ -1,0 +1,15 @@
+hero_image: "/images/hero/fees-hero.jpg"
+hero_subtitle: "Clear fee guidance, secure payment directions, and important reminders for parents and guardians."
+day_scholars: "Kindly visit our welcoming school for more details and to get the fee structure"
+boarders: "Kindly visit our welcoming school for more details and to get the fee structure"
+payment_method: "Our fees is paid via the school bank transfer visit the school to get the payment details."
+bank_details: "Visit the school to get more information on the bank details"
+payment_instructions:
+  - "Make the payment via bank transfer after confirming with the school."
+  - "Use the correct student details and reference."
+  - "Keep the receipt for proof of payment."
+  - "Submit the transaction details to the school office."
+important_notes:
+  - "All payments must be made via bank transfer"
+  - "Keep receipt for proof of payment"
+  - "Payment deadlines will be communicated"
