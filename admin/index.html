@@ -1,36 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Content Manager | Mavoko Boys School</title>
-    <link rel="icon" type="image/png" href="/images/branding/favicon.png" />
-    <style>
-        :root { --primary: #1a3a6b; --gold: #c8963e; }
-        body { margin: 0; padding: 0; }
-    </style>
-    <!-- Load Netlify Identity widget FIRST -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mavoko Boys School CMS</title>
+  <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" />
 </head>
 <body>
-    <!-- Initialize Netlify Identity before Decap loads -->
-    <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", function(user) {
-                if (!user) {
-                    window.netlifyIdentity.on("login", function() {
-                        document.location.reload();
-                    });
-                }
-            });
-            window.netlifyIdentity.init();
-        }
-    </script>
-
-    <!-- Now load Decap CMS -->
-    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    <script>
-        CMS.registerPreviewStyle('/css/styles.css');
-    </script>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
