@@ -908,10 +908,4 @@ collections:
             name: "cta_text"
             widget: "text"
             default: "Give your child the gift of quality education and a bright future at Mavoko Boys School."
-editor:
-  preview: true
 
-media_folder: "assets/images"
-public_folder: "/assets/images"
-
-editor_components: []
