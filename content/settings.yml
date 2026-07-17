@@ -1,37 +1,41 @@
-school_name: "Mavoko Boys' School"
-short_name: "Mavoko Boys"
-motto: "Serve and Excel"
+school_name: Mavoko Boys' School
+short_name: Mavoko Boys
+motto: Serve and Excel
 motto_quote: '"SERVE AND EXCEL"'
-vision: "A leading institution in the provision of quality education for national development"
-mission: "To provide education and life skills through the provision of adequate learning experiences"
+vision: A leading institution in the provision of quality education for national
+  development
+mission: To provide education and life skills through the provision of adequate
+  learning experiences
 established: 1990
 student_count: 759
 staff_count: 47
 classroom_count: 13
 lab_count: 2
-location: "Athi River, Machakos County"
-postal_address: "P.O. Box 561-00204, Athi River"
-phone: "+254 768 453 189"
-email: "mavokosec@gmail.com"
-display_email: "info@mavokoboys.ac.ke"
+location: Athi River, Machakos County
+postal_address: P.O. Box 561-00204, Athi River
+phone: +254 768 453 189
+email: mavokosec@gmail.com
+display_email: info@mavokoboys.ac.ke
 whatsapp: "254768453189"
-facebook_url: "https://web.facebook.com/p/Mavoko-High-School-100065352828914/"
+facebook_url: https://web.facebook.com/p/Mavoko-High-School-100065352828914/
 twitter_url: "#"
 instagram_url: "#"
 youtube_url: "#"
 linkedin_url: "#"
-logo: "/images/branding/logo_placeholder.svg"
-favicon: "/images/branding/favicon.png"
+logo: /images/uploads/chatgpt-image-jul-17-2026-07_32_39-pm.png
+favicon: /images/branding/favicon.png
 hero_images:
-  - image: "/images/hero/gate_exterior_main.jpg"
-    alt_text: "Mavoko Boys School gate entrance - Motto"
-    caption: "Our Motto"
+  - image: /images/hero/gate_exterior_main.jpg
+    alt_text: Mavoko Boys School gate entrance - Motto
+    caption: Our Motto
     caption_text: '"SERVE AND EXCEL"'
-  - image: "/images/hero/gate_exterior_alt.jpg"
-    alt_text: "Mavoko Boys School campus - Vision"
-    caption: "Our Vision"
-    caption_text: "A leading institution in the provision of quality education for national development"
-  - image: "/images/hero/school_campus_mission.jpg"
-    alt_text: "Mavoko Boys School students - Mission"
-    caption: "Our Mission"
-    caption_text: "To provide education and life skills through the provision of adequate learning experiences"
+  - image: /images/hero/gate_exterior_alt.jpg
+    alt_text: Mavoko Boys School campus - Vision
+    caption: Our Vision
+    caption_text: A leading institution in the provision of quality education for
+      national development
+  - image: /images/hero/school_campus_mission.jpg
+    alt_text: Mavoko Boys School students - Mission
+    caption: Our Mission
+    caption_text: To provide education and life skills through the provision of
+      adequate learning experiences
