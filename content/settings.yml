@@ -22,7 +22,7 @@ twitter_url: "#"
 instagram_url: "#"
 youtube_url: "#"
 linkedin_url: "#"
-logo: /images/uploads/chatgpt-image-jul-17-2026-07_32_39-pm.png
+logo: https://chatgpt.com/s/m_6a5a5ac792c881919aee77f9cf3b4030
 favicon: /images/uploads/chatgpt-image-jul-17-2026-07_32_39-pm.png
 hero_images:
   - image: /images/hero/gate_exterior_main.jpg
