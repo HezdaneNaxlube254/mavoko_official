@@ -1,0 +1,14 @@
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.cms-editor-preview img {
+  max-width: 100%;
+  height: auto;
+}
+
+img[alt] {
+  display: block;
+  margin: 1rem auto;
+}
