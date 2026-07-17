@@ -6,36 +6,35 @@
     <title>Content Manager | Mavoko Boys School</title>
     <link rel="icon" type="image/png" href="/images/branding/favicon.png" />
     <style>
-        :root {
-            --primary: #1a3a6b;
-            --gold: #c8963e;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-        }
+        :root { --primary: #1a3a6b; --gold: #c8963e; }
+        body { margin: 0; padding: 0; }
     </style>
+    <!-- Load the Netlify Identity widget first -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-    <!-- Netlify Identity Widget (must load before Decap CMS) -->
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script>
+        // Initialize the identity widget – it will automatically handle invite tokens
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", function(user) {
                 if (!user) {
+                    // User is not logged in, the widget will show the appropriate form
+                    // (login, signup, or password setup if a token is present)
                     window.netlifyIdentity.on("login", function() {
+                        // After successful login/signup, reload to enter the CMS
                         document.location.reload();
                     });
                 }
             });
+            // This triggers the widget to look for invite tokens and show the relevant form
             window.netlifyIdentity.init();
+        } else {
+            console.error("Netlify Identity widget failed to load.");
         }
     </script>
 
-    <!-- Decap CMS -->
+    <!-- Decap CMS loads after identity is ready -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-    
-    <!-- Custom preview styles -->
     <script>
         CMS.registerPreviewStyle('/css/styles.css');
     </script>

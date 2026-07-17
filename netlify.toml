@@ -1,6 +1,15 @@
 [build]
   publish = "."
 
+# Redirect invite tokens to admin
+[[redirects]]
+  from = "/"
+  to = "/admin/"
+  status = 200
+  force = true
+  query = { invite_token = ":token" }
+
+# CMS admin page fallback
 [[redirects]]
   from = "/admin/*"
   to = "/admin/index.html"
