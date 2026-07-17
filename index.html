@@ -612,5 +612,11 @@
     </script>
     <!-- CMS Data Loader -->
 <script src="js/cms-loader.js"></script>
+<script>
+  // Redirect invite tokens to the admin page
+  if (window.location.hash && window.location.hash.includes('invite_token')) {
+    window.location.replace('/admin/' + window.location.hash);
+  }
+</script>
 </body>
 </html>
