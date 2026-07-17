@@ -8,36 +8,76 @@
     <style>
         :root { --primary: #1a3a6b; --gold: #c8963e; }
         body { margin: 0; padding: 0; }
+        /* Hide the default Decap CMS login button */
+        .css-1b7q5qj-StyledAuthenticationPage button {
+            display: none !important;
+        }
+        /* Our custom login button */
+        .custom-login-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: center;
+        }
+        .custom-login-btn:hover {
+            opacity: 0.9;
+        }
     </style>
-    <!-- Load the Netlify Identity widget first -->
+    <!-- Load Netlify Identity widget first -->
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
     <script>
-        // Initialize the identity widget – it will automatically handle invite tokens
+        // Initialize the identity widget
         if (window.netlifyIdentity) {
             window.netlifyIdentity.on("init", function(user) {
                 if (!user) {
-                    // User is not logged in, the widget will show the appropriate form
-                    // (login, signup, or password setup if a token is present)
-                    window.netlifyIdentity.on("login", function() {
-                        // After successful login/signup, reload to enter the CMS
-                        document.location.reload();
-                    });
+                    // No user logged in – the widget is ready to show forms
                 }
+                window.netlifyIdentity.on("login", function() {
+                    document.location.reload();
+                });
             });
-            // This triggers the widget to look for invite tokens and show the relevant form
             window.netlifyIdentity.init();
-        } else {
-            console.error("Netlify Identity widget failed to load.");
         }
     </script>
 
-    <!-- Decap CMS loads after identity is ready -->
+    <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <script>
         CMS.registerPreviewStyle('/css/styles.css');
+
+        // Wait for Decap CMS to render the login page, then inject our custom button
+        window.addEventListener('load', function() {
+            // The Decap login button appears after CMS loads; we replace it
+            setTimeout(function() {
+                var decapButton = document.querySelector('[class*="StyledAuthenticationPage"] button');
+                if (decapButton) {
+                    // Hide the original
+                    decapButton.style.display = 'none';
+                    // Create our button
+                    var btn = document.createElement('button');
+                    btn.className = 'custom-login-btn';
+                    btn.textContent = 'Staff Login';
+                    btn.onclick = function(e) {
+                        e.preventDefault();
+                        if (window.netlifyIdentity) {
+                            window.netlifyIdentity.open();
+                        } else {
+                            alert('Login service is loading. Please refresh the page.');
+                        }
+                    };
+                    // Insert after the hidden button
+                    decapButton.parentNode.insertBefore(btn, decapButton.nextSibling);
+                }
+            }, 500);
+        });
     </script>
-    
 </body>
 </html>
