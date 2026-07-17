@@ -1,20 +1,14 @@
 [build]
   publish = "."
 
-# Redirect invite tokens to admin
+# Correctly passes the email confirmation token directly to the admin folder
 [[redirects]]
   from = "/"
+  query = { invite_token = ":token" }
   to = "/admin/"
   status = 200
-  force = true
-  query = { invite_token = ":token" }
 
-# CMS admin page fallback
-[[redirects]]
-  from = "/admin/*"
-  to = "/admin/index.html"
-  status = 200
-
+# Security and clean loading headers
 [[headers]]
   for = "/*"
   [headers.values]
