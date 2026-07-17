@@ -1,17 +1,8 @@
 [build]
   publish = "."
 
-# Correctly passes the email confirmation token directly to the admin folder
+# This allows the CMS to work as a single-page app
 [[redirects]]
-  from = "/"
-  query = { invite_token = ":token" }
-  to = "/admin/"
+  from = "/admin/*"
+  to = "/admin/index.html"
   status = 200
-
-# Security and clean loading headers
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "DENY"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"

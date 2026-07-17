@@ -3,113 +3,34 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Staff Login | Mavoko Boys School</title>
+    <title>Content Manager | Mavoko Boys School</title>
     <link rel="icon" type="image/png" href="/images/branding/favicon.png" />
     <style>
-        :root {
-            --primary: #1a3a6b;
-            --gold: #c8963e;
-            --white: #ffffff;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        .login-container {
-            background: var(--white);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-        }
-        .login-container img {
-            width: 80px;
-            margin-bottom: 1rem;
-        }
-        .login-container h1 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.5rem;
-        }
-        .login-container p {
-            color: #555;
-            margin-bottom: 2rem;
-        }
-        #staff-login-btn {
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            padding: 0.8rem 2rem;
-            font-size: 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: background 0.3s;
-            width: 100%;
-        }
-        #staff-login-btn:hover {
-            background: #0e2a4d;
-        }
-        .error-message {
-            color: red;
-            margin-top: 1rem;
-        }
+        :root { --primary: #1a3a6b; --gold: #c8963e; }
+        body { margin: 0; padding: 0; }
     </style>
-    
-    </script>
+    <!-- Load Netlify Identity widget FIRST -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-    <div class="login-container" id="login-ui">
-        <img src="/images/branding/logo_placeholder.svg" alt="School Logo" onerror="this.style.display='none'" />
-        <h1>Mavoko Boys School</h1>
-        <p>Content Management System</p>
-        <button id="staff-login-btn">Staff Login</button>
-        <div id="error-message" class="error-message"></div>
-    </div>
-
-    <!-- 2. Load the actual Decap CMS Application Engine -->
-    <script src="https://unpkg.com@^3.0.0/dist/decap-cms.js"></script>
-
+    <!-- Initialize Netlify Identity before Decap loads -->
     <script>
-        window.addEventListener('load', function() {
-            const loginBtn = document.getElementById('staff-login-btn');
-            const errorEl = document.getElementById('error-message');
-            const loginUi = document.getElementById('login-ui');
-
-            if (!window.netlifyIdentity) {
-                errorEl.textContent = 'Login service failed to load. Please refresh the page.';
-                loginBtn.disabled = true;
-                return;
-            }
-
-            window.netlifyIdentity.init();
-
-            function checkUserAndToggle(user) {
-                if (user) {
-                    // Hide the custom login container so Decap CMS can render its dashboard interface
-                    loginUi.style.display = 'none';
-                } else {
-                    loginUi.style.display = 'block';
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", function(user) {
+                if (!user) {
+                    window.netlifyIdentity.on("login", function() {
+                        document.location.reload();
+                    });
                 }
-            }
-
-            // Check initial login state
-            checkUserAndToggle(window.netlifyIdentity.currentUser());
-
-            window.netlifyIdentity.on('init', user => checkUserAndToggle(user));
-            window.netlifyIdentity.on('login', user => checkUserAndToggle(user));
-            window.netlifyIdentity.on('logout', () => checkUserAndToggle(null));
-
-            loginBtn.addEventListener('click', function() {
-                window.netlifyIdentity.open();
             });
-        });
+            window.netlifyIdentity.init();
+        }
+    </script>
+
+    <!-- Now load Decap CMS -->
+    <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+    <script>
+        CMS.registerPreviewStyle('/css/styles.css');
     </script>
 </body>
 </html>
