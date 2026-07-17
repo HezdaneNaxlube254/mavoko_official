@@ -6,7 +6,6 @@
     <title>Content Manager | Mavoko Boys School</title>
     <link rel="icon" type="image/png" href="/images/branding/favicon.png" />
     <style>
-        /* Custom branding for CMS login page */
         :root {
             --primary: #1a3a6b;
             --gold: #c8963e;
@@ -15,19 +14,29 @@
             margin: 0;
             padding: 0;
         }
-        /* Customize the Decap CMS frame header */
-        [class*="css"] .AppHeader {
-            background-color: var(--primary) !important;
-        }
     </style>
 </head>
 <body>
-    <!-- Include Decap CMS from CDN -->
+    <!-- Netlify Identity Widget (must load before Decap CMS) -->
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", function(user) {
+                if (!user) {
+                    window.netlifyIdentity.on("login", function() {
+                        document.location.reload();
+                    });
+                }
+            });
+            window.netlifyIdentity.init();
+        }
+    </script>
+
+    <!-- Decap CMS -->
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     
-    <!-- Custom preview styles (optional) -->
+    <!-- Custom preview styles -->
     <script>
-        // Register a custom preview style for the CMS
         CMS.registerPreviewStyle('/css/styles.css');
     </script>
 </body>
