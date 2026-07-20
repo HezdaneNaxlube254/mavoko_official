@@ -271,14 +271,10 @@ p {
 }
 
 .site-title {
-    display: none;
+    display: inline; /* Show on all screen sizes */
 }
 
-@media (min-width: 768px) {
-    .site-title {
-        display: inline;
-    }
-}
+/* Remove or comment out the @media rule that hides it on mobile */
 
 /* Navigation Menu */
 .nav-menu {
@@ -2930,4 +2926,842 @@ textarea:focus {
     .hero-bg-slide { transition: none; }
     .carousel-slide { transition: none; }
     .sub-page-hero { clip-path: none; -webkit-clip-path: none; border-radius: 0; }
+}
+/* ========================================
+   STUDENT LIFE - TABS STYLES
+   ======================================== */
+
+/* Tab Buttons */
+.student-life-tabs .tab-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.student-life-tabs .tab-button {
+    border: 2px solid var(--color-navy);
+    background: var(--color-white);
+    color: var(--color-navy);
+    padding: 0.75rem 1.5rem;
+    border-radius: 999px;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all var(--transition-medium);
+    min-height: 44px;
+}
+
+.student-life-tabs .tab-button i {
+    margin-right: var(--spacing-xs);
+}
+
+.student-life-tabs .tab-button:hover {
+    background: var(--color-neutral-light);
+    transform: translateY(-2px);
+}
+
+.student-life-tabs .tab-button.active {
+    background: var(--color-gold);
+    color: var(--color-navy);
+    border-color: var(--color-gold);
+}
+
+/* Tab Panels */
+.student-life-tabs .tab-panel {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.student-life-tabs .tab-panel.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Category Description */
+.category-description {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto var(--spacing-lg);
+    font-size: 1.05rem;
+    color: var(--color-neutral-muted);
+}
+
+/* Houses Grid */
+.houses-grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+@media (min-width: 600px) {
+    .houses-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .houses-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.house-card {
+    background: var(--color-white);
+    border-radius: 12px;
+    padding: var(--spacing-md);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    transition: all var(--transition-medium);
+}
+
+.house-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+.house-card .house-image-wrap {
+    width: 100%;
+    height: 160px;
+    background: var(--color-navy);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+}
+
+.house-card .house-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.house-card .house-color {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 4px;
+}
+
+.house-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-xs);
+}
+
+.house-card p {
+    font-size: 0.9rem;
+    color: var(--color-neutral-muted);
+    margin: 0;
+}
+
+/* Sports Tags */
+.sports-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.sport-tag {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-navy);
+    color: var(--color-white);
+    border-radius: 20px;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all var(--transition-medium);
+}
+
+.sport-tag:hover {
+    background: var(--color-gold);
+    color: var(--color-navy);
+    transform: translateY(-2px);
+}
+
+/* Sports Images */
+.sports-images-grid,
+.clubs-images-grid {
+    display: grid;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-md);
+}
+
+@media (min-width: 600px) {
+    .sports-images-grid,
+    .clubs-images-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .sports-images-grid,
+    .clubs-images-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.sport-image-wrap,
+.club-image-wrap {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    background: var(--color-navy);
+}
+
+.sport-image-wrap img,
+.club-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.sport-image-wrap .sport-label,
+.club-image-wrap .club-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-sm);
+    background: linear-gradient(transparent, rgba(14, 42, 77, 0.8));
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+/* Clubs Tags */
+.clubs-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.club-tag {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-neutral-light);
+    color: var(--color-navy);
+    border-radius: 20px;
+    font-family: var(--font-heading);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all var(--transition-medium);
+}
+
+.club-tag:hover {
+    background: var(--color-gold);
+    color: var(--color-navy);
+    transform: translateY(-2px);
+}
+
+/* Image Placeholder inside student life */
+.student-life-content .image-placeholder {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-navy);
+    color: var(--color-gold);
+    font-size: 0.7rem;
+    text-align: center;
+    padding: 0.5rem;
+    gap: 0.1rem;
+}
+
+.student-life-content .image-placeholder small {
+    color: var(--color-neutral-muted);
+    font-size: 0.6rem;
+}
+
+.student-life-content .house-image-wrap img[src=""],
+.student-life-content .house-image-wrap img:not([src]),
+.student-life-content .sport-image-wrap img[src=""],
+.student-life-content .sport-image-wrap img:not([src]),
+.student-life-content .club-image-wrap img[src=""],
+.student-life-content .club-image-wrap img:not([src]) {
+    display: none;
+}
+
+.student-life-content .house-image-wrap img[src=""] + .image-placeholder,
+.student-life-content .house-image-wrap img:not([src]) + .image-placeholder,
+.student-life-content .sport-image-wrap img[src=""] + .image-placeholder,
+.student-life-content .sport-image-wrap img:not([src]) + .image-placeholder,
+.student-life-content .club-image-wrap img[src=""] + .image-placeholder,
+.student-life-content .club-image-wrap img:not([src]) + .image-placeholder {
+    display: flex;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .student-life-tabs .tab-button {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+        min-height: 38px;
+    }
+    
+    .student-life-tabs .tab-buttons {
+        gap: var(--spacing-xs);
+    }
+}
+/* ========================================
+   LEADERSHIP - CIRCULAR FIX & HOD IMAGES
+   ======================================== */
+
+/* FIX: Ensure circular frames stay circular on all screen sizes */
+.profile-image-wrap {
+    position: relative;
+    border-radius: 50% !important;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--color-navy);
+    aspect-ratio: 1/1;
+}
+
+/* Ensure images fill the circle properly */
+.profile-image-wrap .profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* HOD Cards with Images */
+.hod-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--color-white);
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-medium);
+    cursor: pointer;
+    min-height: 200px;
+    padding: var(--spacing-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hod-card .hod-image-wrap {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--color-navy);
+    flex-shrink: 0;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+}
+
+.hod-card .hod-image-wrap .hod-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder for HOD images */
+.hod-card .hod-image-wrap .image-placeholder {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-navy);
+    color: var(--color-gold);
+    font-size: 0.6rem;
+    text-align: center;
+    padding: 0.3rem;
+    border-radius: 50%;
+    gap: 0.05rem;
+}
+
+.hod-card .hod-image-wrap .image-placeholder small {
+    color: var(--color-neutral-muted);
+    font-size: 0.5rem;
+}
+
+.hod-card .hod-image-wrap .hod-image[src=""],
+.hod-card .hod-image-wrap .hod-image:not([src]) {
+    display: none;
+}
+
+.hod-card .hod-image-wrap .hod-image[src=""] + .image-placeholder,
+.hod-card .hod-image-wrap .hod-image:not([src]) + .image-placeholder {
+    display: flex;
+}
+
+/* HOD Card Hover - Preserve existing behavior */
+.hod-card .hod-icon {
+    font-size: 1.5rem;
+    color: var(--color-gold);
+    margin-bottom: var(--spacing-xs);
+    transition: all var(--transition-medium);
+}
+
+.hod-card h4 {
+    font-size: 0.95rem;
+    color: var(--color-navy);
+    margin: 0;
+    transition: all var(--transition-medium);
+}
+
+.hod-card .hod-comment {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-navy);
+    color: var(--color-white);
+    padding: var(--spacing-md);
+    text-align: center;
+    font-size: 0.85rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-medium);
+    border-radius: 12px;
+    line-height: 1.6;
+    z-index: 2;
+}
+
+.hod-card:hover .hod-comment {
+    opacity: 1;
+    visibility: visible;
+}
+
+.hod-card:hover .hod-icon,
+.hod-card:hover h4 {
+    opacity: 0;
+}
+
+/* Keep the image visible on hover */
+.hod-card:hover .hod-image-wrap {
+    opacity: 1;
+}
+
+.hod-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Responsive: Ensure circles stay circular on mobile */
+@media (max-width: 768px) {
+    .profile-image-wrap {
+        width: 120px !important;
+        height: 120px !important;
+        min-height: 120px !important;
+        max-width: 120px !important;
+        max-height: 120px !important;
+        margin: 0 auto;
+    }
+    
+    .principal-card .profile-image-wrap {
+        width: 140px !important;
+        height: 140px !important;
+        min-height: 140px !important;
+        max-width: 140px !important;
+        max-height: 140px !important;
+    }
+    
+    .deputy-card .profile-image-wrap {
+        width: 100px !important;
+        height: 100px !important;
+        min-height: 100px !important;
+        max-width: 100px !important;
+        max-height: 100px !important;
+    }
+    
+    .profile-card:not(.principal-card):not(.deputy-card) .profile-image-wrap {
+        width: 100px !important;
+        height: 100px !important;
+        min-height: 100px !important;
+        max-width: 100px !important;
+        max-height: 100px !important;
+    }
+    
+    /* HOD cards responsive */
+    .hod-card .hod-image-wrap {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-image-wrap {
+        width: 100px !important;
+        height: 100px !important;
+        min-height: 100px !important;
+        max-width: 100px !important;
+        max-height: 100px !important;
+    }
+    
+    .principal-card .profile-image-wrap {
+        width: 110px !important;
+        height: 110px !important;
+        min-height: 110px !important;
+        max-width: 110px !important;
+        max-height: 110px !important;
+    }
+    
+    .deputy-card .profile-image-wrap {
+        width: 80px !important;
+        height: 80px !important;
+        min-height: 80px !important;
+        max-width: 80px !important;
+        max-height: 80px !important;
+    }
+    
+    .profile-card:not(.principal-card):not(.deputy-card) .profile-image-wrap {
+        width: 80px !important;
+        height: 80px !important;
+        min-height: 80px !important;
+        max-width: 80px !important;
+        max-height: 80px !important;
+    }
+}
+/* ========================================
+   HOD CARDS - FULL IMAGE BACKGROUND
+   ======================================== */
+
+.hod-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    min-height: 240px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all var(--transition-medium);
+    background: var(--color-navy);
+}
+
+/* Full background image */
+.hod-card .hod-image-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hod-card .hod-image-bg .hod-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder for HOD images */
+.hod-card .hod-image-bg .image-placeholder {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-navy);
+    color: var(--color-gold);
+    font-size: 0.8rem;
+    text-align: center;
+    padding: 1rem;
+    gap: 0.2rem;
+    z-index: 1;
+}
+
+.hod-card .hod-image-bg .image-placeholder small {
+    color: var(--color-neutral-muted);
+    font-size: 0.7rem;
+}
+
+.hod-card .hod-image-bg .hod-bg-image[src=""],
+.hod-card .hod-image-bg .hod-bg-image:not([src]) {
+    display: none;
+}
+
+.hod-card .hod-image-bg .hod-bg-image[src=""] + .image-placeholder,
+.hod-card .hod-image-bg .hod-bg-image:not([src]) + .image-placeholder {
+    display: flex;
+}
+
+/* Dark overlay on image */
+.hod-card .hod-image-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(14, 42, 77, 0.3) 0%, rgba(14, 42, 77, 0.7) 100%);
+}
+
+/* HOD content - on top of image */
+.hod-card .hod-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-md);
+    transition: all var(--transition-medium);
+}
+
+.hod-card .hod-icon {
+    font-size: 2.5rem;
+    color: var(--color-gold);
+    margin-bottom: var(--spacing-xs);
+    transition: all var(--transition-medium);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.hod-card h4 {
+    font-size: 1.1rem;
+    color: var(--color-white);
+    margin: 0;
+    transition: all var(--transition-medium);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* HOD Comment Overlay - appears on hover */
+.hod-card .hod-comment {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(14, 42, 77, 0.92);
+    color: var(--color-white);
+    padding: var(--spacing-lg);
+    text-align: center;
+    font-size: 0.9rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-medium);
+    border-radius: 12px;
+    line-height: 1.6;
+}
+
+.hod-card:hover .hod-comment {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* On hover, dim the content */
+.hod-card:hover .hod-content {
+    opacity: 0.3;
+}
+
+.hod-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hod-card {
+        min-height: 180px;
+    }
+    
+    .hod-card .hod-icon {
+        font-size: 2rem;
+    }
+    
+    .hod-card h4 {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hod-card {
+        min-height: 160px;
+    }
+    
+    .hod-card .hod-icon {
+        font-size: 1.5rem;
+    }
+    
+    .hod-card h4 {
+        font-size: 0.85rem;
+    }
+}
+/* ========================================
+   STUDENT LIFE - IMAGE HOVER EFFECTS
+   ======================================== */
+
+/* House Cards Hover */
+.house-card .house-image-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.house-card .house-image-wrap img {
+    transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.house-card:hover .house-image-wrap img {
+    transform: scale(1.1);
+    filter: brightness(0.85);
+}
+
+/* Sports Images Hover */
+.sport-image-wrap {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.sport-image-wrap img {
+    transition: transform 0.5s ease, filter 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.sport-image-wrap:hover img {
+    transform: scale(1.12);
+    filter: brightness(0.8);
+}
+
+/* Gold overlay on hover */
+.sport-image-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(242, 194, 48, 0);
+    transition: background 0.5s ease;
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.sport-image-wrap:hover::before {
+    background: rgba(242, 194, 48, 0.15);
+}
+
+/* Sport label slide up on hover */
+.sport-image-wrap .sport-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-sm);
+    background: linear-gradient(transparent, rgba(14, 42, 77, 0.85));
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 2;
+}
+
+.sport-image-wrap:hover .sport-label {
+    transform: translateY(0);
+}
+
+/* Club Images Hover */
+.club-image-wrap {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+
+.club-image-wrap img {
+    transition: transform 0.5s ease, filter 0.5s ease;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.club-image-wrap:hover img {
+    transform: scale(1.12);
+    filter: brightness(0.8);
+}
+
+/* Gold overlay for clubs */
+.club-image-wrap::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(242, 194, 48, 0);
+    transition: background 0.5s ease;
+    z-index: 1;
+    border-radius: 8px;
+}
+
+.club-image-wrap:hover::before {
+    background: rgba(242, 194, 48, 0.15);
+}
+
+/* Club label slide up on hover */
+.club-image-wrap .club-label {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-sm);
+    background: linear-gradient(transparent, rgba(14, 42, 77, 0.85));
+    color: var(--color-white);
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: center;
+    transform: translateY(100%);
+    transition: transform 0.4s ease;
+    z-index: 2;
+}
+
+.club-image-wrap:hover .club-label {
+    transform: translateY(0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .sport-image-wrap .sport-label,
+    .club-image-wrap .club-label {
+        font-size: 0.75rem;
+        transform: translateY(0);
+        background: linear-gradient(transparent, rgba(14, 42, 77, 0.85));
+    }
+    
+    /* On mobile, label is always visible since there's no hover */
+    .sport-image-wrap .sport-label,
+    .club-image-wrap .club-label {
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .sport-image-wrap .sport-label,
+    .club-image-wrap .club-label {
+        font-size: 0.65rem;
+        padding: var(--spacing-xs);
+    }
+}
+.stat-item.no-plus .stat-number::after {
+    content: '';
 }

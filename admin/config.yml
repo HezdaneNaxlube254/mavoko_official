@@ -107,7 +107,7 @@ collections:
           - label: "School Logo"
             name: "logo"
             widget: "image"
-            default: "/images/branding/logo_placeholder.svg"
+            default: "/images/branding/logo_placeholder.png"
           - label: "Favicon"
             name: "favicon"
             widget: "image"

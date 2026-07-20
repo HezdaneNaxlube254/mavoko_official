@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- YAML Parser for CMS Data -->
-<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="icon" type="image/png" href="images/branding/favicon.png" />
@@ -58,6 +58,7 @@
     </header>
 
     <main id="main-content">
+        <!-- HERO SECTION WITH PLACEHOLDER -->
         <section class="sub-page-hero" aria-label="Student life page title">
             <div class="sub-hero-background">
                 <img src="images/hero/student-life-hero.jpg" alt="Student life hero image" class="sub-hero-image" />
@@ -75,174 +76,232 @@
             </div>
         </section>
 
-        <section class="page-section reveal" aria-labelledby="houses-title">
+        <!-- STUDENT LIFE TABS SECTION -->
+        <section class="page-section reveal" aria-labelledby="student-life-title">
             <div class="container">
-                <h2 id="houses-title" class="section-title">Houses</h2>
-                <div class="gallery-wrapper">
-                    <div class="gallery-carousel">
-                        <div class="gallery-track">
-                            <div class="gallery-slide center" data-index="0">
-                                <img src="images/gallery/houses_01.jpg" alt="Sharmi House" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 houses_01.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Sharmi House</div>
+                <h2 id="student-life-title" class="section-title">Explore Student Life</h2>
+                
+                <div class="student-life-tabs" role="tablist" aria-label="Student life categories">
+                    <!-- Tab Buttons -->
+                    <div class="tab-buttons">
+                        <button class="tab-button active" role="tab" aria-selected="true" data-tab="houses">
+                            <i class="fas fa-home"></i> Houses
+                        </button>
+                        <button class="tab-button" role="tab" aria-selected="false" data-tab="sports">
+                            <i class="fas fa-running"></i> Sports
+                        </button>
+                        <button class="tab-button" role="tab" aria-selected="false" data-tab="clubs">
+                            <i class="fas fa-users"></i> Clubs & Societies
+                        </button>
+                    </div>
+
+                    <!-- TAB 1: HOUSES -->
+                    <div class="tab-panel active" id="houses" role="tabpanel">
+                        <div class="student-life-content">
+                            <div class="category-description">
+                                <p>Mavoko Boys' School has four houses that foster healthy competition, teamwork, and school spirit.</p>
                             </div>
-                            <div class="gallery-slide left" data-index="1">
-                                <img src="images/gallery/houses_02.jpg" alt="Ndeti House" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 houses_02.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Ndeti House</div>
-                            </div>
-                            <div class="gallery-slide right" data-index="2">
-                                <img src="images/gallery/houses_03.jpg" alt="Chris Yarinakis House" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 houses_03.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Chris Yarinakis House</div>
-                            </div>
-                            <div class="gallery-slide" data-index="3">
-                                <img src="images/gallery/houses_04.jpg" alt="Maina House" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 houses_04.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Maina House</div>
+                            <div class="houses-grid">
+                                <article class="house-card">
+                                    <div class="house-image-wrap">
+                                        <img src="images/gallery/houses_01.jpg" alt="Sharmi House" loading="lazy" />
+                                        <div class="image-placeholder">
+                                            <span>📁 houses_01.jpg</span>
+                                            <small>/images/gallery/</small>
+                                        </div>
+                                    </div>
+                                    <h3>Sharmi House</h3>
+                                    <p><span class="house-color" style="background:#F2C230;"></span> Yellow</p>
+                                </article>
+                                <article class="house-card">
+                                    <div class="house-image-wrap">
+                                        <img src="images/gallery/houses_02.jpg" alt="Ndeti House" loading="lazy" />
+                                        <div class="image-placeholder">
+                                            <span>📁 houses_02.jpg</span>
+                                            <small>/images/gallery/</small>
+                                        </div>
+                                    </div>
+                                    <h3>Ndeti House</h3>
+                                    <p><span class="house-color" style="background:#2196F3;"></span> Blue</p>
+                                </article>
+                                <article class="house-card">
+                                    <div class="house-image-wrap">
+                                        <img src="images/gallery/houses_03.jpg" alt="Chris Yarinakis House" loading="lazy" />
+                                        <div class="image-placeholder">
+                                            <span>📁 houses_03.jpg</span>
+                                            <small>/images/gallery/</small>
+                                        </div>
+                                    </div>
+                                    <h3>Chris Yarinakis House</h3>
+                                    <p><span class="house-color" style="background:#E53935;"></span> Red</p>
+                                </article>
+                                <article class="house-card">
+                                    <div class="house-image-wrap">
+                                        <img src="images/gallery/houses_04.jpg" alt="Maina House" loading="lazy" />
+                                        <div class="image-placeholder">
+                                            <span>📁 houses_04.jpg</span>
+                                            <small>/images/gallery/</small>
+                                        </div>
+                                    </div>
+                                    <h3>Maina House</h3>
+                                    <p><span class="house-color" style="background:#43A047;"></span> Green</p>
+                                </article>
                             </div>
                         </div>
-                        <div class="gallery-nav">
-                            <button class="gallery-btn gallery-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
-                            <div class="gallery-dots">
-                                <span class="gallery-dot active" data-index="0"></span>
-                                <span class="gallery-dot" data-index="1"></span>
-                                <span class="gallery-dot" data-index="2"></span>
-                                <span class="gallery-dot" data-index="3"></span>
+                    </div>
+
+                    <!-- TAB 2: SPORTS -->
+                    <div class="tab-panel" id="sports" role="tabpanel">
+                        <div class="student-life-content">
+                            <div class="category-description">
+                                <p>Mavoko Boys' School offers a wide range of sports to develop physical fitness, teamwork, and sportsmanship.</p>
                             </div>
-                            <button class="gallery-btn gallery-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
+                            <div class="sports-grid">
+                                <div class="sport-tag">Rugby</div>
+                                <div class="sport-tag">Handball</div>
+                                <div class="sport-tag">Hockey</div>
+                                <div class="sport-tag">Volleyball</div>
+                                <div class="sport-tag">Basketball</div>
+                                <div class="sport-tag">Soccer</div>
+                                <div class="sport-tag">Table Tennis</div>
+                                <div class="sport-tag">Lawn Tennis</div>
+                                <div class="sport-tag">Badminton</div>
+                            </div>
+                            <div class="sports-images-grid">
+                                <div class="sport-image-wrap">
+                                    <img src="images/gallery/sports_01.jpg" alt="Lawn Tennis" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 sports_01.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="sport-label">Lawn Tennis</span>
+                                </div>
+                                <div class="sport-image-wrap">
+                                    <img src="images/gallery/sports_02.jpg" alt="Basketball" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 sports_02.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="sport-label">Basketball</span>
+                                </div>
+                                <div class="sport-image-wrap">
+                                    <img src="images/gallery/sports_03.jpg" alt="Soccer Team" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 sports_03.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="sport-label">Soccer Team</span>
+                                </div>
+                                <div class="sport-image-wrap">
+                                    <img src="images/gallery/sports_04.jpg" alt="Rugby" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 sports_04.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="sport-label">Rugby</span>
+                                </div>
+                                <div class="sport-image-wrap">
+                                    <img src="images/gallery/sports_05.jpg" alt="Volleyball" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 sports_05.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="sport-label">Volleyball</span>
+                                </div>
+                                <div class="sport-image-wrap">
+                                    <img src="images/gallery/sports_06.jpg" alt="Hockey" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 sports_06.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="sport-label">Hockey</span>
+                                </div>
+                                <div class="sport-image-wrap">
+                                    <img src="images/gallery/sports_07.jpg" alt="Table Tennis" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 sports_07.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="sport-label">Table Tennis</span>
+                                </div>
+                                <div class="sport-image-wrap">
+                                    <img src="images/gallery/sports_08.jpg" alt="Badminton" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 sports_08.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="sport-label">Badminton</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 3: CLUBS & SOCIETIES (Redcross Team Added) -->
+                    <div class="tab-panel" id="clubs" role="tabpanel">
+                        <div class="student-life-content">
+                            <div class="category-description">
+                                <p>Mavoko Boys' School has a vibrant co-curricular program with clubs and societies that develop talents, leadership, and community engagement.</p>
+                            </div>
+                            <div class="clubs-grid">
+                                <div class="club-tag">Drama Club</div>
+                                <div class="club-tag">CU</div>
+                                <div class="club-tag">Mathematics Club</div>
+                                <div class="club-tag">Scouts Movement</div>
+                                <div class="club-tag">Library Club</div>
+                                <div class="club-tag">Young Christian Society</div>
+                                <div class="club-tag">Muslim Society</div>
+                                <div class="club-tag">KSEF</div>
+                                <div class="club-tag">Redcross Team</div>
+                            </div>
+                            <div class="clubs-images-grid">
+                                <div class="club-image-wrap">
+                                    <img src="images/gallery/clubs_01.jpg" alt="Drama Club" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 clubs_01.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="club-label">Drama Club</span>
+                                </div>
+                                <div class="club-image-wrap">
+                                    <img src="images/gallery/clubs_02.jpg" alt="CU" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 clubs_02.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="club-label">CU</span>
+                                </div>
+                                <div class="club-image-wrap">
+                                    <img src="images/gallery/clubs_03.jpg" alt="Scouts Movement" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 clubs_03.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="club-label">Scouts Movement</span>
+                                </div>
+                                <div class="club-image-wrap">
+                                    <img src="images/gallery/clubs_04.jpg" alt="KSEF" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 clubs_04.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="club-label">KSEF NATIONAL QUALIFIERS</span>
+                                </div>
+                                <div class="club-image-wrap">
+                                    <img src="images/gallery/clubs_05.jpg" alt="Redcross Team" loading="lazy" />
+                                    <div class="image-placeholder">
+                                        <span>📁 clubs_05.jpg</span>
+                                        <small>/images/gallery/</small>
+                                    </div>
+                                    <span class="club-label">Redcross Team</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="page-section alt-section reveal" aria-labelledby="sports-title">
-            <div class="container">
-                <h2 id="sports-title" class="section-title">Sports</h2>
-                <div class="page-content-card">
-                    <p>Rugby, Handball, Hockey, Volleyball, Basketball, Soccer, Table Tennis, Badminton, Lawn Tennis, Athletics</p>
-                </div>
-                <div class="gallery-wrapper">
-                    <div class="gallery-carousel">
-                        <div class="gallery-track">
-                            <div class="gallery-slide center" data-index="0">
-                                <img src="images/gallery/sports_01.jpg" alt="Rugby" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 sports_01.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Rugby</div>
-                            </div>
-                            <div class="gallery-slide left" data-index="1">
-                                <img src="images/gallery/sports_02.jpg" alt="Football" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 sports_02.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Football</div>
-                            </div>
-                            <div class="gallery-slide right" data-index="2">
-                                <img src="images/gallery/sports_03.jpg" alt="Athletics" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 sports_03.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Athletics</div>
-                            </div>
-                            <div class="gallery-slide" data-index="3">
-                                <img src="images/gallery/sports_04.jpg" alt="Volleyball" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 sports_04.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Volleyball</div>
-                            </div>
-                        </div>
-                        <div class="gallery-nav">
-                            <button class="gallery-btn gallery-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
-                            <div class="gallery-dots">
-                                <span class="gallery-dot active" data-index="0"></span>
-                                <span class="gallery-dot" data-index="1"></span>
-                                <span class="gallery-dot" data-index="2"></span>
-                                <span class="gallery-dot" data-index="3"></span>
-                            </div>
-                            <button class="gallery-btn gallery-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="page-section reveal" aria-labelledby="clubs-title">
-            <div class="container">
-                <h2 id="clubs-title" class="section-title">Clubs & Societies</h2>
-                <div class="page-content-card">
-                    <p>Drama Club, Music Club, Mathematics Club, Scouts Movement, Library Club, Christian Union, Young Christian Society, Muslim Society, Kenya Science & Engineering Fair (KSEF) participation</p>
-                </div>
-                <div class="gallery-wrapper">
-                    <div class="gallery-carousel">
-                        <div class="gallery-track">
-                            <div class="gallery-slide center" data-index="0">
-                                <img src="images/gallery/clubs_01.jpg" alt="Drama Club" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 clubs_01.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Drama Club</div>
-                            </div>
-                            <div class="gallery-slide left" data-index="1">
-                                <img src="images/gallery/clubs_02.jpg" alt="Music Club" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 clubs_02.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Music Club</div>
-                            </div>
-                            <div class="gallery-slide right" data-index="2">
-                                <img src="images/gallery/clubs_03.jpg" alt="Scouts Movement" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 clubs_03.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">Scouts Movement</div>
-                            </div>
-                            <div class="gallery-slide" data-index="3">
-                                <img src="images/gallery/clubs_04.jpg" alt="KSEF activity" loading="lazy" />
-                                <div class="gallery-placeholder">
-                                    <span>📸 clubs_04.jpg</span>
-                                    <small>/images/gallery/</small>
-                                </div>
-                                <div class="gallery-slide-label">KSEF</div>
-                            </div>
-                        </div>
-                        <div class="gallery-nav">
-                            <button class="gallery-btn gallery-prev" aria-label="Previous image"><i class="fas fa-chevron-left"></i></button>
-                            <div class="gallery-dots">
-                                <span class="gallery-dot active" data-index="0"></span>
-                                <span class="gallery-dot" data-index="1"></span>
-                                <span class="gallery-dot" data-index="2"></span>
-                                <span class="gallery-dot" data-index="3"></span>
-                            </div>
-                            <button class="gallery-btn gallery-next" aria-label="Next image"><i class="fas fa-chevron-right"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- BOARDING & DAY SCHOOLING -->
         <section class="page-section alt-section reveal" aria-labelledby="boarding-title">
             <div class="container">
                 <h2 id="boarding-title" class="section-title">Boarding & Day Schooling</h2>
@@ -320,6 +379,37 @@
     <script src="js/carousel.js"></script>
     <script src="js/animations.js"></script>
     <!-- CMS Data Loader -->
-<script src="js/cms-loader.js"></script>
+    <script src="js/cms-loader.js"></script>
+
+    <!-- Tab Switching Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.student-life-tabs .tab-button');
+            const tabPanels = document.querySelectorAll('.student-life-tabs .tab-panel');
+
+            tabButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    const tabName = this.getAttribute('data-tab');
+
+                    tabButtons.forEach(function(btn) {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+
+                    tabPanels.forEach(function(panel) {
+                        panel.classList.remove('active');
+                    });
+
+                    this.classList.add('active');
+                    this.setAttribute('aria-selected', 'true');
+
+                    const targetPanel = document.getElementById(tabName);
+                    if (targetPanel) {
+                        targetPanel.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
