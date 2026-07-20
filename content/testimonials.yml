@@ -1,10 +1,12 @@
-items:
-  - name: "Mr. John Mwangi"
-    role: "Parent"
-    quote: "Mavoko Boys has transformed my son's academic performance and character. The teachers are dedicated and the environment is conducive for learning."
-  - name: "James Ochieng"
+testimonials:
+  - name: "Gilbert Malindi"
+    role: "Alumni"
+    quote: "A great school that produced the engineer i am today🥰🥰."
+
+  - name: "Samuel Masai"
     role: "Alumnus"
-    quote: "The quality of education and the holistic development approach at Mavoko Boys is exceptional. I'm proud to be an alumnus of this great institution."
-  - name: "Mrs. Grace Wanjiru"
-    role: "Parent"
-    quote: "The staff at Mavoko Boys are professional and caring. My son has grown both academically and socially since joining this school."
+    quote: "Mavoko boys where great men and leaders are made school motto we lead the leaders unless it was changed...."
+
+  - name: "Eng. Davis Musau"
+    role: "Alumni"
+    quote: "I am glad to give back to the community that shaped me.We wil motivate our fellows to excel academically as we did and am sure the staff is also motivated to do so."

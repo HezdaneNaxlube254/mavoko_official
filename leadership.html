@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- YAML Parser for CMS Data -->
-<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="icon" type="image/png" href="images/branding/favicon.png" />
@@ -58,7 +58,7 @@
     </header>
 
     <main id="main-content">
-        <!-- HERO SECTION WITH PLACEHOLDER SYSTEM -->
+        <!-- HERO SECTION -->
         <section class="sub-page-hero" aria-label="Leadership page title">
             <div class="sub-hero-background">
                 <img src="images/hero/leadership-hero.jpg" alt="Leadership hero image" class="sub-hero-image" />
@@ -76,7 +76,7 @@
             </div>
         </section>
 
-        <!-- PRINCIPAL SECTION -->
+        <!-- PRINCIPAL -->
         <section class="page-section reveal" aria-labelledby="principal-title">
             <div class="container">
                 <h2 id="principal-title" class="section-title">Principal</h2>
@@ -106,7 +106,7 @@
             </div>
         </section>
 
-        <!-- DEPUTY PRINCIPALS SECTION -->
+        <!-- DEPUTY PRINCIPALS -->
         <section class="page-section alt-section reveal" aria-labelledby="deputy-title">
             <div class="container">
                 <h2 id="deputy-title" class="section-title">Deputy Principals</h2>
@@ -153,7 +153,7 @@
             </div>
         </section>
 
-        <!-- BOM SECTION -->
+        <!-- BOM -->
         <section class="page-section reveal" aria-labelledby="bom-title">
             <div class="container">
                 <h2 id="bom-title" class="section-title">Board of Management</h2>
@@ -189,8 +189,62 @@
             </div>
         </section>
 
-        <!-- HEADS OF DEPARTMENTS - FULL CARD IMAGES -->
-        <section class="page-section reveal" aria-labelledby="hods-title">
+        <!-- NEW: ADMINISTRATION TEAM -->
+        <section class="page-section reveal" aria-labelledby="admin-team-title">
+            <div class="container">
+                <h2 id="admin-team-title" class="section-title">Administration Team</h2>
+                <div class="hod-grid">
+                    <!-- Senior Teacher (replaces Careers, but Careers remains a department) -->
+                    <article class="hod-card">
+                        <div class="hod-image-bg">
+                            <img src="images/leadership/senior_teacher.jpg" alt="Senior Teacher" class="hod-bg-image" />
+                            <div class="image-placeholder">
+                                <span>📁 senior_teacher.jpg</span>
+                                <small>/images/leadership/</small>
+                            </div>
+                        </div>
+                        <div class="hod-content">
+                            <i class="fas fa-star hod-icon"></i>
+                            <h4>Senior Teacher</h4>
+                        </div>
+                        <p class="hod-comment">Overseeing teacher development, mentorship, and curriculum support</p>
+                    </article>
+                    <!-- Dean of Studies -->
+                    <article class="hod-card">
+                        <div class="hod-image-bg">
+                            <img src="images/leadership/hod_dean_studies.jpg" alt="Dean of Studies" class="hod-bg-image" />
+                            <div class="image-placeholder">
+                                <span>📁 hod_dean_studies.jpg</span>
+                                <small>/images/leadership/</small>
+                            </div>
+                        </div>
+                        <div class="hod-content">
+                            <i class="fas fa-chart-line hod-icon"></i>
+                            <h4>Dean of Studies</h4>
+                        </div>
+                        <p class="hod-comment">Overseeing curriculum implementation and academic performance</p>
+                    </article>
+                    <!-- School Chaplain -->
+                    <article class="hod-card">
+                        <div class="hod-image-bg">
+                            <img src="images/leadership/school_chaplain.jpg" alt="School Chaplain" class="hod-bg-image" />
+                            <div class="image-placeholder">
+                                <span>📁 school_chaplain.jpg</span>
+                                <small>/images/leadership/</small>
+                            </div>
+                        </div>
+                        <div class="hod-content">
+                            <i class="fas fa-hands-praying hod-icon"></i>
+                            <h4>School Chaplain</h4>
+                        </div>
+                        <p class="hod-comment">Providing spiritual guidance and pastoral care to students and staff</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- HEADS OF DEPARTMENTS (ALL DEPARTMENTS PRESERVED) -->
+        <section class="page-section alt-section reveal" aria-labelledby="hods-title">
             <div class="container">
                 <h2 id="hods-title" class="section-title">Heads of Departments</h2>
                 <div class="hod-grid">
@@ -224,9 +278,9 @@
                     </article>
                     <article class="hod-card">
                         <div class="hod-image-bg">
-                            <img src="images/leadership/hod_sciences.jpg" alt="Head of Sciences" class="hod-bg-image" />
+                            <img src="images/leadership/hod_science.jpg" alt="Head of Sciences" class="hod-bg-image" />
                             <div class="image-placeholder">
-                                <span>📁 hod_sciences.jpg</span>
+                                <span>📁 hod_science.jpg</span>
                                 <small>/images/leadership/</small>
                             </div>
                         </div>
@@ -336,34 +390,6 @@
                     </article>
                     <article class="hod-card">
                         <div class="hod-image-bg">
-                            <img src="images/leadership/hod_games.jpg" alt="Head of Games" class="hod-bg-image" />
-                            <div class="image-placeholder">
-                                <span>📁 hod_games.jpg</span>
-                                <small>/images/leadership/</small>
-                            </div>
-                        </div>
-                        <div class="hod-content">
-                            <i class="fas fa-futbol hod-icon"></i>
-                            <h4>Games</h4>
-                        </div>
-                        <p class="hod-comment">Overseeing sports, physical education, and co-curricular athletic programs</p>
-                    </article>
-                    <article class="hod-card">
-                        <div class="hod-image-bg">
-                            <img src="images/leadership/hod_dean_studies.jpg" alt="Dean of Studies" class="hod-bg-image" />
-                            <div class="image-placeholder">
-                                <span>📁 hod_dean_studies.jpg</span>
-                                <small>/images/leadership/</small>
-                            </div>
-                        </div>
-                        <div class="hod-content">
-                            <i class="fas fa-chart-line hod-icon"></i>
-                            <h4>Dean of Studies</h4>
-                        </div>
-                        <p class="hod-comment">Overseeing curriculum implementation and academic performance</p>
-                    </article>
-                    <article class="hod-card">
-                        <div class="hod-image-bg">
                             <img src="images/leadership/hod_library.jpg" alt="Head of Library" class="hod-bg-image" />
                             <div class="image-placeholder">
                                 <span>📁 hod_library.jpg</span>
@@ -381,19 +407,18 @@
         </section>
     </main>
 
-   <footer class="site-footer" role="contentinfo">
+    <footer class="site-footer" role="contentinfo">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="footer-logo-wrapper">
-                        <img src="images/branding/logo_placeholder.png" alt="School Logo" class="footer-logo" />
+                        <img src="images/branding/logo_placeholder(2).png" alt="School Logo" class="footer-logo" />
                         <span class="footer-logo-placeholder">📄 logo_placeholder.png → /images/branding/</span>
                     </div>
                     <h2>Mavoko Boys School</h2>
                     <p>Athi River, Machakos County</p>
                     <p>P.O. Box 561-00204, Athi River</p>
                 </div>
-
                 <div class="footer-links">
                     <h3>Quick Links</h3>
                     <ul>
@@ -403,7 +428,6 @@
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-contact">
                     <h3>Contact</h3>
                     <p><span class="label">Phone:</span> <a href="tel:+254768453189">+254768453189</a></p>
@@ -418,7 +442,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <p>&copy; <span id="currentYear"></span> Mavoko Boys School. All rights reserved.</p>
                 <p class="developer-credit">Powered by <a href="https://kayntech.netlify.app/" target="_blank" rel="noopener noreferrer">KaynTech</a></p>
@@ -439,7 +462,7 @@
     <script src="js/main.js"></script>
     <script src="js/carousel.js"></script>
     <script src="js/animations.js"></script>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Hero placeholder handler
@@ -514,10 +537,8 @@
                 button.addEventListener('click', function() {
                     const target = document.getElementById(this.getAttribute('aria-controls'));
                     const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                    
                     this.setAttribute('aria-expanded', !isExpanded);
                     target.classList.toggle('open');
-                    
                     const icon = this.querySelector('.toggle-icon');
                     if (icon) {
                         icon.textContent = isExpanded ? '▶' : '▼';
@@ -531,6 +552,6 @@
         });
     </script>
     <!-- CMS Data Loader -->
-<script src="js/cms-loader.js"></script>
+    <script src="js/cms-loader.js"></script>
 </body>
 </html>
