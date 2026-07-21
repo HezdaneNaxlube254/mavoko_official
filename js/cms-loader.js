@@ -123,9 +123,9 @@ async function loadGlobalSettings() {
         whatsappBtn.href = `https://wa.me/${settings.whatsapp}`;
     }
     
-    // Logo images
-    setImageSrc('.site-logo', settings.logo);
-    setImageSrc('.footer-logo', settings.logo);
+    // Logo images - SPLIT HEADER AND FOOTER LOGOS
+    setImageSrc('.site-logo', settings.header_logo);
+    setImageSrc('.footer-logo', settings.footer_logo);
     
     // Favicon
     const favicon = document.querySelector('link[rel="icon"]');
@@ -150,27 +150,32 @@ async function loadHomepage() {
     
     if (!settings) return;
     
-    // Hero Carousel
+    // ===== UPDATED: Hero Carousel (No innerHTML replacement) =====
     if (settings.hero_images && settings.hero_images.length > 0) {
-        const carouselSlides = document.getElementById('heroCarousel');
-        const bgContainer = document.querySelector('.hero-backgrounds');
-        
-        if (carouselSlides) {
-            carouselSlides.innerHTML = settings.hero_images.map((slide, i) => `
-                <div class="carousel-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
-                    <span class="carousel-eyebrow">${slide.caption || ''}</span>
-                    <h2 class="carousel-statement">${slide.caption_text || ''}</h2>
-                </div>
-            `).join('');
-        }
-        
-        if (bgContainer) {
-            bgContainer.innerHTML = settings.hero_images.map((slide, i) => `
-                <div class="hero-bg-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
-                    <img src="${slide.image}" alt="${slide.alt_text || ''}" class="hero-image" />
-                </div>
-            `).join('');
-        }
+        const slideElements = document.querySelectorAll('#heroCarousel .carousel-slide');
+        const bgElements = document.querySelectorAll('.hero-backgrounds .hero-bg-slide');
+
+        settings.hero_images.forEach((slide, i) => {
+            // Update Text Slides
+            if (slideElements[i]) {
+                const eyebrow = slideElements[i].querySelector('.carousel-eyebrow');
+                const statement = slideElements[i].querySelector('.carousel-statement');
+                if (eyebrow) eyebrow.textContent = slide.caption || '';
+                if (statement) statement.textContent = slide.caption_text || '';
+            }
+
+            // Update Background Images
+            if (bgElements[i]) {
+                const img = bgElements[i].querySelector('img');
+                if (img) {
+                    img.src = slide.image;
+                    img.alt = slide.alt_text || '';
+                    // Hide placeholder if it exists
+                    const placeholder = bgElements[i].querySelector('.hero-placeholder');
+                    if (placeholder) placeholder.style.display = 'none';
+                }
+            }
+        });
     }
     
     // Motto/Vision/Mission Cards
@@ -200,7 +205,6 @@ async function loadHomepage() {
                 const img = facilityCards[i].querySelector('img');
                 const h3 = facilityCards[i].querySelector('h3');
                 const p = facilityCards[i].querySelector('p');
-                if (img) setImageSrc(null, facility.image); // handled differently
                 if (img) img.src = facility.image;
                 if (h3) h3.textContent = facility.name;
                 if (p) p.textContent = facility.description;
@@ -223,17 +227,20 @@ async function loadHomepage() {
         });
     }
     
-    // Gallery
+    // ===== UPDATED: Gallery (No innerHTML replacement) =====
     if (homepage && homepage.gallery) {
-        const galleryTrack = document.querySelector('#galleryCarousel .gallery-track');
-        if (galleryTrack) {
-            galleryTrack.innerHTML = homepage.gallery.map((item, i) => `
-                <div class="gallery-slide ${i === 0 ? 'center' : i === 1 ? 'left' : i === 2 ? 'right' : ''}" data-index="${i}">
-                    <img src="${item.image}" alt="${item.label}" loading="lazy" />
-                    <div class="gallery-slide-label">${item.label}</div>
-                </div>
-            `).join('');
-        }
+        const slides = document.querySelectorAll('#galleryCarousel .gallery-slide');
+        homepage.gallery.forEach((item, i) => {
+            if (slides[i]) {
+                const img = slides[i].querySelector('img');
+                if (img) img.src = item.image;
+                const label = slides[i].querySelector('.gallery-slide-label');
+                if (label) label.textContent = item.label;
+                // Hide placeholder if it exists
+                const placeholder = slides[i].querySelector('.gallery-placeholder');
+                if (placeholder) placeholder.style.display = 'none';
+            }
+        });
     }
     
     // Testimonials
@@ -599,8 +606,8 @@ async function loadStudentLifePage() {
     if (!studentLife) return;
     
     // Hero
-    setImageSrc('.site-logo', settings.header_logo);
-    setImageSrc('.footer-logo', settings.footer_logo);
+    setImageSrc('.sub-hero-image', studentLife.hero_image);
+    setText('.sub-hero-subtitle', studentLife.hero_subtitle);
     
     // Houses gallery
     if (studentLife.houses && studentLife.houses.length > 0) {
