@@ -599,8 +599,8 @@ async function loadStudentLifePage() {
     if (!studentLife) return;
     
     // Hero
-    setImageSrc('.sub-hero-image', studentLife.hero_image);
-    setText('.sub-hero-subtitle', studentLife.hero_subtitle);
+    setImageSrc('.site-logo', settings.header_logo);
+    setImageSrc('.footer-logo', settings.footer_logo);
     
     // Houses gallery
     if (studentLife.houses && studentLife.houses.length > 0) {

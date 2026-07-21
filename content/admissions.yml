@@ -1,4 +1,4 @@
-hero_image: "/images/hero/admissions-hero.jpg"
+hero_image: "images/hero/admissions-hero.jpg"
 hero_subtitle: "Admissions are open for January and two terms after interview, with clear requirements and a simple application process."
 period: "January intake; and any other time after student passes interview."
 requirements: |
@@ -21,8 +21,9 @@ documents:
   - "2 passport photos in school uniform"
   - "Filled admission form"
 fees_tab: |
-  - We offer different fee structures at school depending on whether you are a boarder or day scholar. Visit our school for more info.
-  - *Payment method: Our fees is paid through the bank. For more information confirm with the school to avoid inconveniences.*
+  We offer different fee structures at school depending on whether you are a boarder or day scholar. Visit our school for more info.
+
+  *Payment method: Our fees is paid through the bank. For more information confirm with the school to avoid inconveniences.*
 checklist:
   - "Obtain and fill admission form"
   - "Submit required documents"

@@ -1,8 +1,8 @@
-hero_image: "/images/hero/fees-hero.jpg"
+hero_image: "images/hero/fees-hero.jpg"
 hero_subtitle: "Clear fee guidance, secure payment directions, and important reminders for parents and guardians."
 day_scholars: "Kindly visit our welcoming school for more details and to get the fee structure"
 boarders: "Kindly visit our welcoming school for more details and to get the fee structure"
-payment_method: "Our fees is paid via the school bank transfer visit the school to get the payment details."
+payment_method: "Transfer Only"
 bank_details: "Visit the school to get more information on the bank details"
 payment_instructions:
   - "Make the payment via bank transfer after confirming with the school."
