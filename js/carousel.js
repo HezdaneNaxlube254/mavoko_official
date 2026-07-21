@@ -23,13 +23,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const pauseBtn = document.querySelector('.carousel-pause');
     
     let currentSlide = 0;
-    let totalSlides = slides.length;
+    const totalSlides = slides.length;
     let autoAdvance = true;
     let autoInterval = null;
     const AUTO_DELAY = 5000; // 5 seconds
     
+    // Log carousel info (helps debugging on Netlify)
+    console.log('Hero carousel: Total slides =', totalSlides);
+    
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    console.log('Hero carousel: prefersReducedMotion =', prefersReducedMotion);
     
     function goToSlide(index) {
         slides.forEach(function(slide) {
@@ -72,6 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pauseBtn.textContent = '⏸';
             pauseBtn.setAttribute('aria-label', 'Pause auto-rotation');
         }
+        console.log('Hero carousel: Auto-advance started');
     }
     
     function stopAutoAdvance() {
@@ -84,6 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pauseBtn.textContent = '▶';
             pauseBtn.setAttribute('aria-label', 'Play auto-rotation');
         }
+        console.log('Hero carousel: Auto-advance stopped');
     }
     
     function pauseAutoAdvance() {
@@ -122,16 +128,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Initialize Hero Carousel
+    // --- Initialize Hero Carousel ---
     if (prefersReducedMotion) {
+        // Reduced motion: show first slide, hide controls
         goToSlide(0);
         document.querySelectorAll('.carousel-controls, .carousel-dots, .carousel-pause').forEach(function(el) {
             el.style.display = 'none';
         });
+        console.log('Hero carousel: Reduced motion mode - auto-rotation disabled');
     } else {
+        // Normal mode: start carousel
         goToSlide(0);
-        startAutoAdvance();
         
+        // ** CRITICAL FIX: Delay auto-advance start to ensure DOM is fully ready **
+        setTimeout(function() {
+            startAutoAdvance();
+            console.log('Hero carousel: Auto-advance started after 300ms delay');
+        }, 300);
+        
+        // --- Event Listeners ---
         if (prevBtn) {
             prevBtn.addEventListener('click', function() {
                 prevSlide();
@@ -185,7 +200,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Hero image placeholders
+    // --- Hero image placeholders ---
     document.querySelectorAll('.hero-bg-slide').forEach(function(slide) {
         const img = slide.querySelector('.hero-image');
         const placeholder = slide.querySelector('.hero-placeholder');
