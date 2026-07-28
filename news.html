@@ -9,11 +9,92 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <!-- YAML Parser for CMS Data -->
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="icon" type="image/png" href="images/branding/favicon.png" />
+
+    <style>
+        /* News card horizontal layout */
+        .news-card-page {
+            display: flex;
+            flex-direction: row;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: transform 0.3s;
+        }
+        .news-card-page:hover {
+            transform: translateY(-4px);
+        }
+        .news-card-image {
+            flex: 0 0 200px;
+            max-width: 200px;
+            height: 200px;
+            overflow: hidden;
+        }
+        .news-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .news-card-content {
+            flex: 1;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .news-category {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            color: var(--primary, #1a3a6b);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .news-card-content h3 {
+            margin: 0 0 0.5rem;
+            font-size: 1.3rem;
+        }
+        .news-card-content time {
+            color: #777;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .news-card-content p {
+            color: #444;
+            line-height: 1.5;
+        }
+        .news-body {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #333;
+        }
+
+        /* Featured card slightly larger */
+        .featured-news-card .news-card-image {
+            flex: 0 0 250px;
+            max-width: 250px;
+            height: 250px;
+        }
+        @media (max-width: 768px) {
+            .news-card-page {
+                flex-direction: column;
+            }
+            .news-card-image {
+                flex: 0 0 200px;
+                max-width: 100%;
+                height: 200px;
+            }
+            .featured-news-card .news-card-image {
+                max-width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -70,12 +151,11 @@
             <div class="sub-hero-content">
                 <div class="container">
                     <h1 class="sub-hero-title">News & Updates</h1>
-                    <p class="sub-hero-subtitle">Latest school stories, events, announcements, and community updates.</p>
+                    <p class="sub-hero-subtitle"></p>
                 </div>
             </div>
         </section>
 
-        <!-- Featured News (dynamic) -->
         <section class="page-section reveal" aria-labelledby="featured-title">
             <div class="container">
                 <h2 id="featured-title" class="section-title">Featured News</h2>
@@ -83,7 +163,6 @@
             </div>
         </section>
 
-        <!-- All Articles (dynamic) -->
         <section class="page-section alt-section reveal" aria-labelledby="news-title">
             <div class="container">
                 <h2 id="news-title" class="section-title">Latest Updates</h2>
@@ -164,7 +243,6 @@
     <script src="js/main.js"></script>
     <script src="js/carousel.js"></script>
     <script src="js/animations.js"></script>
-    <!-- CMS Data Loader -->
     <script src="js/cms-loader.js"></script>
 </body>
 </html>

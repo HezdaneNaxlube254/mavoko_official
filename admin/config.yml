@@ -325,15 +325,17 @@ collections:
               - { label: "Quote", name: "quote", widget: "text" }
 
   # --------------------------------------------
-  # 12. NEWS (file-based list of articles)
+  # 12. NEWS (with hero image and subtitle)
   # --------------------------------------------
   - name: "news"
     label: "News"
     files:
       - name: "news"
-        label: "News Articles"
+        label: "News Page"
         file: "content/news.yml"
         fields:
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "Hero Subtitle", name: "hero_subtitle", widget: "text" }
           - label: "Featured Article"
             name: "featured"
             widget: "object"
