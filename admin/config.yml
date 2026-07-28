@@ -1,14 +1,13 @@
 backend:
   name: git-gateway
-  branch: main # Or 'master' depending on your repository default
+  branch: main
 
-# These lines tell Netlify where to store the YAML data and media
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
 
 collections:
   # --------------------------------------------
-  # 1. GLOBAL SETTINGS (Includes Header & Footer logos)
+  # 1. GLOBAL SETTINGS
   # --------------------------------------------
   - name: "settings"
     label: "Global Settings"
@@ -38,12 +37,14 @@ collections:
           - { label: "Header Logo (Top Nav)", name: "header_logo", widget: "image", default: "images/branding/logo_placeholder.png" }
           - { label: "Footer Logo (Bottom)", name: "footer_logo", widget: "image", default: "images/branding/logo_placeholder(2).png" }
           - { label: "Favicon", name: "favicon", widget: "image", default: "images/branding/favicon.png" }
-          - { label: "Hero Images (Carousel)", name: "hero_images", widget: "list", fields: [
-              { label: "Image", name: "image", widget: "image" },
-              { label: "Alt Text", name: "alt_text", widget: "string" },
-              { label: "Caption (Eyebrow)", name: "caption", widget: "string" },
-              { label: "Caption Text (Heading)", name: "caption_text", widget: "string" }
-            ] }
+          - label: "Hero Images (Carousel)"
+            name: "hero_images"
+            widget: "list"
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Alt Text", name: "alt_text", widget: "string" }
+              - { label: "Caption (Eyebrow)", name: "caption", widget: "string" }
+              - { label: "Caption Text (Heading)", name: "caption_text", widget: "string" }
 
   # --------------------------------------------
   # 2. HOMEPAGE
@@ -127,7 +128,7 @@ collections:
               - { label: "Name", name: "name", widget: "string" }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Photo", name: "photo", widget: "image" }
-              - { label: "Bio (supports markdown)", name: "bio", widget: "markdown" }
+              - { label: "Bio", name: "bio", widget: "markdown" }
               - { label: "Quote", name: "quote", widget: "text" }
           - label: "Deputy Principals"
             name: "deputies"
@@ -136,7 +137,7 @@ collections:
               - { label: "Name", name: "name", widget: "string" }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Photo", name: "photo", widget: "image" }
-              - { label: "Bio (supports markdown)", name: "bio", widget: "markdown" }
+              - { label: "Bio", name: "bio", widget: "markdown" }
           - label: "BOM Chair"
             name: "bom_chair"
             widget: "object"
@@ -144,14 +145,25 @@ collections:
               - { label: "Name", name: "name", widget: "string" }
               - { label: "Title", name: "title", widget: "string" }
               - { label: "Photo", name: "photo", widget: "image" }
-              - { label: "Message (supports markdown)", name: "message", widget: "markdown" }
+              - { label: "Message", name: "message", widget: "markdown" }
           - { label: "Parents Association Status", name: "pa_status", widget: "text" }
-          - label: "Heads of Departments (HODs)"
+          - label: "Administration Team"
+            name: "admin_team"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "Icon (Font Awesome)", name: "icon", widget: "string", default: "fa-user" }
+              - { label: "Description", name: "description", widget: "text" }
+          - label: "Heads of Departments"
             name: "hods"
             widget: "list"
             fields:
+              - { label: "Name", name: "name", widget: "string" }
               - { label: "Department", name: "department", widget: "string" }
-              - { label: "Icon (Font Awesome class)", name: "icon", widget: "string", default: "fa-user" }
+              - { label: "Photo", name: "photo", widget: "image" }
+              - { label: "Icon (Font Awesome)", name: "icon", widget: "string", default: "fa-book" }
               - { label: "Description", name: "description", widget: "text" }
 
   # --------------------------------------------
@@ -311,3 +323,34 @@ collections:
               - { label: "Name", name: "name", widget: "string" }
               - { label: "Role", name: "role", widget: "string" }
               - { label: "Quote", name: "quote", widget: "text" }
+
+  # --------------------------------------------
+  # 12. NEWS (file-based list of articles)
+  # --------------------------------------------
+  - name: "news"
+    label: "News"
+    files:
+      - name: "news"
+        label: "News Articles"
+        file: "content/news.yml"
+        fields:
+          - label: "Featured Article"
+            name: "featured"
+            widget: "object"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - { label: "Category", name: "category", widget: "select", options: ["Academic", "Sports", "Events", "Announcement"] }
+              - { label: "Summary", name: "summary", widget: "text" }
+              - { label: "Body", name: "body", widget: "markdown" }
+          - label: "All Articles"
+            name: "articles"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Date", name: "date", widget: "datetime" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - { label: "Category", name: "category", widget: "select", options: ["Academic", "Sports", "Events", "Announcement"] }
+              - { label: "Summary", name: "summary", widget: "text" }
+              - { label: "Body", name: "body", widget: "markdown" }

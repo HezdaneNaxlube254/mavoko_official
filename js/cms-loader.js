@@ -7,7 +7,6 @@
 // UTILITY FUNCTIONS
 // ============================================
 
-// Fetch and parse a YAML file
 async function fetchCMSData(filePath) {
     try {
         const response = await fetch(filePath);
@@ -20,7 +19,6 @@ async function fetchCMSData(filePath) {
     }
 }
 
-// Safe set text content
 function setText(selector, text, fallback) {
     const el = document.querySelector(selector);
     if (!el) return;
@@ -31,7 +29,6 @@ function setText(selector, text, fallback) {
     }
 }
 
-// Safe set HTML content
 function setHTML(selector, html, fallback) {
     const el = document.querySelector(selector);
     if (!el) return;
@@ -42,14 +39,12 @@ function setHTML(selector, html, fallback) {
     }
 }
 
-// Safe set image src
 function setImageSrc(selector, src, fallback) {
     const el = document.querySelector(selector);
     if (!el) return;
     if (src && src !== '') {
         el.src = src;
         el.style.display = 'block';
-        // Hide placeholder if exists
         const placeholder = el.parentElement?.querySelector('.image-placeholder, .sub-hero-placeholder, .gallery-placeholder');
         if (placeholder) placeholder.style.display = 'none';
     } else if (fallback) {
@@ -57,7 +52,6 @@ function setImageSrc(selector, src, fallback) {
     }
 }
 
-// Set multiple elements by selector
 function setAllText(selector, text) {
     document.querySelectorAll(selector).forEach(el => {
         if (text !== undefined && text !== null && text !== '') {
@@ -66,7 +60,6 @@ function setAllText(selector, text) {
     });
 }
 
-// Convert markdown to HTML (simple version)
 function simpleMarkdownToHTML(md) {
     if (!md) return '';
     return md
@@ -87,27 +80,22 @@ async function loadGlobalSettings() {
     const settings = await fetchCMSData('/content/settings.yml');
     if (!settings) return;
 
-    // Site title in header
     setAllText('.site-title', settings.short_name);
-    
-    // Footer content
     setAllText('.footer-brand h2', settings.school_name);
     setAllText('.footer-brand p:first-of-type', settings.location);
-    
-    // Contact info in footer
+
     const phoneLinks = document.querySelectorAll('.footer-contact a[href^="tel:"]');
     phoneLinks.forEach(link => {
         link.href = `tel:${settings.whatsapp}`;
         link.textContent = settings.phone;
     });
-    
+
     const emailLinks = document.querySelectorAll('.footer-contact a[href^="mailto:"]');
     emailLinks.forEach(link => {
         link.href = `mailto:${settings.email}`;
         link.textContent = settings.display_email;
     });
-    
-    // Social media links
+
     const socialLinks = document.querySelectorAll('.social-links a');
     if (socialLinks.length >= 5) {
         socialLinks[0].href = settings.facebook_url || '#';
@@ -116,26 +104,22 @@ async function loadGlobalSettings() {
         socialLinks[3].href = settings.youtube_url || '#';
         socialLinks[4].href = settings.linkedin_url || '#';
     }
-    
-    // WhatsApp floating button
+
     const whatsappBtn = document.querySelector('.whatsapp-float');
     if (whatsappBtn) {
         whatsappBtn.href = `https://wa.me/${settings.whatsapp}`;
     }
-    
-    // Logo images - SPLIT HEADER AND FOOTER LOGOS
+
     setImageSrc('.site-logo', settings.header_logo);
     setImageSrc('.footer-logo', settings.footer_logo);
-    
-    // Favicon
+
     const favicon = document.querySelector('link[rel="icon"]');
     if (favicon && settings.favicon) {
         favicon.href = settings.favicon;
     }
-    
-    // Page meta
+
     document.title = `${settings.school_name} | Athi River, Machakos — ${settings.motto}`;
-    
+
     return settings;
 }
 
@@ -147,43 +131,35 @@ async function loadHomepage() {
     const settings = await fetchCMSData('/content/settings.yml');
     const homepage = await fetchCMSData('/content/homepage.yml');
     const testimonials = await fetchCMSData('/content/testimonials.yml');
-    
+
     if (!settings) return;
-    
-    // ===== UPDATED: Hero Carousel (No innerHTML replacement) =====
+
     if (settings.hero_images && settings.hero_images.length > 0) {
-        const slideElements = document.querySelectorAll('#heroCarousel .carousel-slide');
-        const bgElements = document.querySelectorAll('.hero-backgrounds .hero-bg-slide');
+        const carouselSlides = document.getElementById('heroCarousel');
+        const bgContainer = document.querySelector('.hero-backgrounds');
 
-        settings.hero_images.forEach((slide, i) => {
-            // Update Text Slides
-            if (slideElements[i]) {
-                const eyebrow = slideElements[i].querySelector('.carousel-eyebrow');
-                const statement = slideElements[i].querySelector('.carousel-statement');
-                if (eyebrow) eyebrow.textContent = slide.caption || '';
-                if (statement) statement.textContent = slide.caption_text || '';
-            }
+        if (carouselSlides) {
+            carouselSlides.innerHTML = settings.hero_images.map((slide, i) => `
+                <div class="carousel-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
+                    <span class="carousel-eyebrow">${slide.caption || ''}</span>
+                    <h2 class="carousel-statement">${slide.caption_text || ''}</h2>
+                </div>
+            `).join('');
+        }
 
-            // Update Background Images
-            if (bgElements[i]) {
-                const img = bgElements[i].querySelector('img');
-                if (img) {
-                    img.src = slide.image;
-                    img.alt = slide.alt_text || '';
-                    // Hide placeholder if it exists
-                    const placeholder = bgElements[i].querySelector('.hero-placeholder');
-                    if (placeholder) placeholder.style.display = 'none';
-                }
-            }
-        });
+        if (bgContainer) {
+            bgContainer.innerHTML = settings.hero_images.map((slide, i) => `
+                <div class="hero-bg-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
+                    <img src="${slide.image}" alt="${slide.alt_text || ''}" class="hero-image" />
+                </div>
+            `).join('');
+        }
     }
-    
-    // Motto/Vision/Mission Cards
+
     setText('.vmm-card:nth-child(1) p', settings.motto_quote);
     setText('.vmm-card:nth-child(2) p', settings.vision);
     setText('.vmm-card:nth-child(3) p', settings.mission);
-    
-    // Stats
+
     if (homepage && homepage.stats) {
         const stats = homepage.stats;
         const statNumbers = document.querySelectorAll('.stat-number');
@@ -196,8 +172,7 @@ async function loadHomepage() {
             statNumbers[5].setAttribute('data-count', stats.laboratories);
         }
     }
-    
-    // Homepage Facilities
+
     if (homepage && homepage.home_facilities) {
         const facilityCards = document.querySelectorAll('.facilities-preview .facility-card');
         homepage.home_facilities.forEach((facility, i) => {
@@ -211,8 +186,7 @@ async function loadHomepage() {
             }
         });
     }
-    
-    // Achievements
+
     if (homepage && homepage.achievements) {
         const achievementCards = document.querySelectorAll('.achievement-card');
         homepage.achievements.forEach((achievement, i) => {
@@ -226,24 +200,19 @@ async function loadHomepage() {
             }
         });
     }
-    
-    // ===== UPDATED: Gallery (No innerHTML replacement) =====
+
     if (homepage && homepage.gallery) {
-        const slides = document.querySelectorAll('#galleryCarousel .gallery-slide');
-        homepage.gallery.forEach((item, i) => {
-            if (slides[i]) {
-                const img = slides[i].querySelector('img');
-                if (img) img.src = item.image;
-                const label = slides[i].querySelector('.gallery-slide-label');
-                if (label) label.textContent = item.label;
-                // Hide placeholder if it exists
-                const placeholder = slides[i].querySelector('.gallery-placeholder');
-                if (placeholder) placeholder.style.display = 'none';
-            }
-        });
+        const galleryTrack = document.querySelector('#galleryCarousel .gallery-track');
+        if (galleryTrack) {
+            galleryTrack.innerHTML = homepage.gallery.map((item, i) => `
+                <div class="gallery-slide ${i === 0 ? 'center' : i === 1 ? 'left' : i === 2 ? 'right' : ''}" data-index="${i}">
+                    <img src="${item.image}" alt="${item.label}" loading="lazy" />
+                    <div class="gallery-slide-label">${item.label}</div>
+                </div>
+            `).join('');
+        }
     }
-    
-    // Testimonials
+
     if (testimonials && testimonials.items) {
         const testimonialCards = document.querySelectorAll('.testimonial-card');
         testimonials.items.forEach((item, i) => {
@@ -257,8 +226,7 @@ async function loadHomepage() {
             }
         });
     }
-    
-    // CTA Banner
+
     if (homepage) {
         setText('.cta-banner .cta-content h2', homepage.cta_heading);
         setText('.cta-banner .cta-content p', homepage.cta_text);
@@ -272,38 +240,31 @@ async function loadHomepage() {
 async function loadAboutPage() {
     const about = await fetchCMSData('/content/about.yml');
     if (!about) return;
-    
-    // Hero
+
     setImageSrc('.sub-hero-image', about.hero_image);
     setText('.sub-hero-subtitle', about.hero_subtitle);
-    
-    // Story
-    setHTML('#story-title + .page-content-card', about.story ? about.story.replace(/\n\n/g, '</p><p>').replace(/^/, '<p>').replace(/$/, '</p>') : null);
-    
-    // Quick Facts
+
+    const storyCard = document.querySelector('#story-title + .container .page-content-card');
+    if (storyCard && about.story) {
+        storyCard.innerHTML = simpleMarkdownToHTML(about.story);
+    }
+
     const quickFactsCard = document.querySelector('.quick-facts-card');
     if (quickFactsCard && about.quick_facts) {
-        const h3 = quickFactsCard.querySelector('h3');
-        const existingContent = quickFactsCard.innerHTML;
         quickFactsCard.innerHTML = `<h3>Quick Facts</h3>${simpleMarkdownToHTML(about.quick_facts)}`;
     }
-    
-    // Core Values
+
     if (about.core_values && about.core_values.length > 0) {
         const valuesGrid = document.querySelector('#values-title + .container .values-grid');
         if (valuesGrid) {
-            valuesGrid.innerHTML = about.core_values.map(value => 
+            valuesGrid.innerHTML = about.core_values.map(value =>
                 `<span class="value-tag">${value}</span>`
             ).join('');
         }
     }
-    
-    // Accreditation
-    setText('.accreditation-card h3', 'Registered');
+
     setText('.accreditation-card p:nth-of-type(1)', about.accreditation);
-    setText('.accreditation-card p:nth-of-type(2) strong', 'Established:');
-    
-    // Stats
+
     const statNumbers = document.querySelectorAll('.stats-section .stat-number');
     if (statNumbers.length >= 4) {
         const settings = await fetchCMSData('/content/settings.yml');
@@ -321,66 +282,148 @@ async function loadAboutPage() {
 // ============================================
 
 async function loadLeadershipPage() {
-    const leadership = await fetchCMSData('/content/leadership.yml');
-    if (!leadership) return;
-    
-    // Hero
-    setImageSrc('.sub-hero-image', leadership.hero_image);
-    setText('.sub-hero-subtitle', leadership.hero_subtitle);
-    
+    const data = await fetchCMSData('/content/leadership.yml');
+    if (!data) return;
+
+    setImageSrc('.sub-hero-image', data.hero_image);
+    setText('.sub-hero-subtitle', data.hero_subtitle);
+
     // Principal
-    if (leadership.principal) {
-        const p = leadership.principal;
-        setText('.principal-card .profile-content h3', p.name);
-        setText('.principal-card .profile-content p strong', p.title);
-        setImageSrc('.principal-card .profile-image', p.photo);
-        setHTML('#principalBio', simpleMarkdownToHTML(p.bio));
-        setText('.principal-quote', p.quote);
-        setText('.quote-attribution', `${p.name}, ${p.title}`);
-    }
-    
-    // Deputy Principals
-    if (leadership.deputies && leadership.deputies.length >= 2) {
-        const deputyCards = document.querySelectorAll('.deputy-card');
-        leadership.deputies.forEach((deputy, i) => {
-            if (deputyCards[i]) {
-                setText(deputyCards[i].querySelector('h3'), deputy.name);
-                setText(deputyCards[i].querySelector('p strong'), deputy.title);
-                setImageSrc(deputyCards[i].querySelector('.profile-image'), deputy.photo);
-                const bioDiv = deputyCards[i].querySelector('.collapse-content');
-                if (bioDiv) bioDiv.innerHTML = simpleMarkdownToHTML(deputy.bio);
-            }
-        });
-    }
-    
-    // BOM Chair
-    if (leadership.bom_chair) {
-        const bom = leadership.bom_chair;
-        const bomCard = document.querySelector('#bom-title + .container .profile-card');
-        if (bomCard) {
-            setText(bomCard.querySelector('h3'), bom.name);
-            setText(bomCard.querySelector('p strong'), bom.title);
-            setImageSrc(bomCard.querySelector('.profile-image'), bom.photo);
-            setHTML('#bomBio', simpleMarkdownToHTML(bom.message));
+    if (data.principal) {
+        const p = data.principal;
+        const container = document.getElementById('principal-container');
+        if (container) {
+            container.innerHTML = `
+                <article class="profile-card principal-card">
+                    <div class="profile-image-wrap">
+                        <img src="${p.photo || ''}" alt="${p.name}" class="profile-image" />
+                        <div class="image-placeholder"><span>📁 ${p.photo || 'No image'}</span></div>
+                    </div>
+                    <div class="profile-content">
+                        <h3>${p.name}</h3>
+                        <p><strong>${p.title}</strong></p>
+                        <button class="collapse-toggle" aria-expanded="false" aria-controls="principalBio">
+                            <span class="toggle-icon">▶</span> Read Bio
+                        </button>
+                        <div id="principalBio" class="collapse-content">${simpleMarkdownToHTML(p.bio)}</div>
+                    </div>
+                </article>
+                <blockquote class="principal-quote">
+                    <span class="quote-attribution">${p.name}, ${p.title}</span>
+                    ${p.quote}
+                </blockquote>
+            `;
         }
     }
-    
-    // PA Status
-    setText('.pending-card p', leadership.pa_status);
-    
-    // HODs
-    if (leadership.hods && leadership.hods.length > 0) {
-        const hodGrid = document.querySelector('.hod-grid');
-        if (hodGrid) {
-            hodGrid.innerHTML = leadership.hods.map(hod => `
+
+    // Deputy Principals
+    if (data.deputies && data.deputies.length > 0) {
+        const grid = document.getElementById('deputies-container');
+        if (grid) {
+            grid.innerHTML = data.deputies.map(dep => `
+                <article class="profile-card deputy-card">
+                    <div class="profile-image-wrap">
+                        <img src="${dep.photo || ''}" alt="${dep.name}" class="profile-image" />
+                        <div class="image-placeholder"><span>📁 ${dep.photo || 'No image'}</span></div>
+                    </div>
+                    <div class="profile-content">
+                        <h3>${dep.name}</h3>
+                        <p><strong>${dep.title}</strong></p>
+                        <button class="collapse-toggle" aria-expanded="false" aria-controls="depBio-${dep.name.replace(/\s/g,'')}">
+                            <span class="toggle-icon">▶</span> Read Bio
+                        </button>
+                        <div class="collapse-content">${simpleMarkdownToHTML(dep.bio)}</div>
+                    </div>
+                </article>
+            `).join('');
+        }
+    }
+
+    // BOM Chair
+    if (data.bom_chair) {
+        const b = data.bom_chair;
+        const container = document.getElementById('bom-container');
+        if (container) {
+            container.innerHTML = `
+                <article class="profile-card">
+                    <div class="profile-image-wrap">
+                        <img src="${b.photo || ''}" alt="${b.name}" class="profile-image" />
+                        <div class="image-placeholder"><span>📁 ${b.photo || 'No image'}</span></div>
+                    </div>
+                    <div class="profile-content">
+                        <h3>${b.name}</h3>
+                        <p><strong>${b.title}</strong></p>
+                        <button class="collapse-toggle" aria-expanded="false" aria-controls="bomBio">
+                            <span class="toggle-icon">▶</span> Read Message
+                        </button>
+                        <div id="bomBio" class="collapse-content">${simpleMarkdownToHTML(b.message)}</div>
+                    </div>
+                </article>
+            `;
+        }
+    }
+
+    // Parents Association
+    const paDiv = document.getElementById('pa-container');
+    if (paDiv) {
+        paDiv.innerHTML = `<p>${data.pa_status || ''}</p>`;
+    }
+
+    // Administration Team
+    if (data.admin_team && data.admin_team.length > 0) {
+        const container = document.getElementById('admin-team-container');
+        if (container) {
+            container.innerHTML = data.admin_team.map(member => `
                 <article class="hod-card">
-                    <i class="fas ${hod.icon} hod-icon"></i>
-                    <h4>${hod.department}</h4>
+                    <div class="hod-image-bg">
+                        <img src="${member.photo || ''}" alt="${member.title}" class="hod-bg-image" />
+                        <div class="image-placeholder"><span>📁 ${member.photo || 'No image'}</span></div>
+                    </div>
+                    <div class="hod-content">
+                        <i class="fas ${member.icon || 'fa-user'} hod-icon"></i>
+                        <h4>${member.title}</h4>
+                    </div>
+                    <p class="hod-comment">${member.description}</p>
+                </article>
+            `).join('');
+        }
+    }
+
+    // Heads of Departments
+    if (data.hods && data.hods.length > 0) {
+        const container = document.getElementById('hods-container');
+        if (container) {
+            container.innerHTML = data.hods.map(hod => `
+                <article class="hod-card">
+                    <div class="hod-image-bg">
+                        <img src="${hod.photo || ''}" alt="${hod.department}" class="hod-bg-image" />
+                        <div class="image-placeholder"><span>📁 ${hod.photo || 'No image'}</span></div>
+                    </div>
+                    <div class="hod-content">
+                        <i class="fas ${hod.icon || 'fa-book'} hod-icon"></i>
+                        <h4>${hod.department}</h4>
+                    </div>
                     <p class="hod-comment">${hod.description}</p>
                 </article>
             `).join('');
         }
     }
+
+    // Re‑attach collapse toggle listeners
+    document.querySelectorAll('.collapse-toggle').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const targetId = this.getAttribute('aria-controls');
+            const target = document.getElementById(targetId);
+            if (!target) return;
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            this.setAttribute('aria-expanded', !isExpanded);
+            target.classList.toggle('open');
+            const icon = this.querySelector('.toggle-icon');
+            if (icon) icon.textContent = isExpanded ? '▶' : '▼';
+            this.innerHTML = (isExpanded ? '▶ ' : '▼ ') + this.textContent.replace(/[▶▼]\s*/, '');
+            this.prepend(icon);
+        });
+    });
 }
 
 // ============================================
@@ -390,18 +433,15 @@ async function loadLeadershipPage() {
 async function loadAcademicsPage() {
     const academics = await fetchCMSData('/content/academics.yml');
     if (!academics) return;
-    
-    // Hero
+
     setImageSrc('.sub-hero-image', academics.hero_image);
     setText('.sub-hero-subtitle', academics.hero_subtitle);
-    
-    // Curriculum Overview
+
     const overviewCard = document.querySelector('#curriculum-title + .container .page-content-card');
     if (overviewCard && academics.curriculum_overview) {
         overviewCard.innerHTML = simpleMarkdownToHTML(academics.curriculum_overview);
     }
-    
-    // Subjects
+
     if (academics.subjects && academics.subjects.length > 0) {
         const subjectCards = document.querySelectorAll('#subjects-title + .container .info-card');
         academics.subjects.forEach((subject, i) => {
@@ -411,26 +451,22 @@ async function loadAcademicsPage() {
             }
         });
     }
-    
-    // Calendar
+
     const calendarCard = document.querySelector('#calendar-title + .container .page-content-card ul');
     if (calendarCard && academics.calendar) {
         calendarCard.innerHTML = simpleMarkdownToHTML(academics.calendar);
     }
-    
-    // Facilities Text
+
     const ratioCard = document.querySelector('.ratio-card div');
     if (ratioCard && academics.facilities_text) {
         ratioCard.innerHTML = simpleMarkdownToHTML(academics.facilities_text);
     }
-    
-    // Achievements
+
     const achievementsCard = document.querySelector('#achievements-title + .container .page-content-card');
     if (achievementsCard && academics.achievements) {
         achievementsCard.innerHTML = simpleMarkdownToHTML(academics.achievements);
     }
-    
-    // Support Programs
+
     if (academics.support_programs && academics.support_programs.length > 0) {
         const supportCards = document.querySelectorAll('#support-title + .container .info-card');
         academics.support_programs.forEach((program, i) => {
@@ -449,26 +485,24 @@ async function loadAcademicsPage() {
 async function loadFacilitiesPage() {
     const facilities = await fetchCMSData('/content/facilities.yml');
     if (!facilities) return;
-    
-    // Hero
+
     setImageSrc('.sub-hero-image', facilities.hero_image);
     setText('.sub-hero-subtitle', facilities.hero_subtitle);
-    
-    // Facilities List
+
     if (facilities.facilities_list && facilities.facilities_list.length > 0) {
         const grid = document.querySelector('.facility-list-grid');
         if (grid) {
-            grid.innerHTML = facilities.facilities_list.map(facility => `
+            grid.innerHTML = facilities.facilities_list.map(f => `
                 <article class="facility-card-page">
                     <div class="facility-image-wrap">
-                        <img src="${facility.image}" alt="${facility.name}" class="facility-page-image" />
+                        <img src="${f.image}" alt="${f.name}" class="facility-page-image" />
                         <div class="image-placeholder">
-                            <span>📁 ${facility.image.split('/').pop()}</span>
+                            <span>📁 ${f.image.split('/').pop()}</span>
                             <small>/images/facilities/</small>
                         </div>
                     </div>
-                    <h3>${facility.name}</h3>
-                    <p class="facility-comment">${facility.description}</p>
+                    <h3>${f.name}</h3>
+                    <p class="facility-comment">${f.description}</p>
                 </article>
             `).join('');
         }
@@ -482,40 +516,36 @@ async function loadFacilitiesPage() {
 async function loadAdmissionsPage() {
     const admissions = await fetchCMSData('/content/admissions.yml');
     if (!admissions) return;
-    
-    // Hero
+
     setImageSrc('.sub-hero-image', admissions.hero_image);
     setText('.sub-hero-subtitle', admissions.hero_subtitle);
-    
-    // Period
+
     setText('#period-title + .container .page-content-card p', admissions.period);
-    
-    // Requirements Tab
     setHTML('#requirements', simpleMarkdownToHTML(admissions.requirements));
-    
-    // Documents Tab
+
     const docList = document.querySelector('#documents .check-list');
     if (docList && admissions.documents) {
-        docList.innerHTML = admissions.documents.map(doc => 
+        docList.innerHTML = admissions.documents.map(doc =>
             `<li><i class="fas fa-check"></i> ${doc}</li>`
         ).join('');
     }
-    
-    // Fees Tab
+
     setHTML('#fees', simpleMarkdownToHTML(admissions.fees_tab));
-    
-    // Checklist
+
     const checklistOl = document.querySelector('#checklist-title + .container .info-list');
     if (checklistOl && admissions.checklist) {
-        checklistOl.innerHTML = admissions.checklist.map((step, i) => 
+        checklistOl.innerHTML = admissions.checklist.map(step =>
             `<li>${step}</li>`
         ).join('');
     }
-    
-    // Contact
-    setText('#contact-admissions-title + .container p:nth-of-type(2) strong', 'Phone:');
-    setText('#contact-admissions-title + .container p:nth-of-type(2)', `Phone: ${admissions.admissions_phone}`);
-    setText('#contact-admissions-title + .container p:nth-of-type(3)', `Email: ${admissions.admissions_email}`);
+
+    const contactSection = document.querySelector('#contact-admissions-title + .container');
+    if (contactSection) {
+        const pPhone = contactSection.querySelector('p:nth-of-type(2)');
+        const pEmail = contactSection.querySelector('p:nth-of-type(3)');
+        if (pPhone) pPhone.innerHTML = `<strong>Phone:</strong> ${admissions.admissions_phone}`;
+        if (pEmail) pEmail.innerHTML = `<strong>Email:</strong> ${admissions.admissions_email}`;
+    }
 }
 
 // ============================================
@@ -525,37 +555,31 @@ async function loadAdmissionsPage() {
 async function loadFeesPage() {
     const fees = await fetchCMSData('/content/fees.yml');
     if (!fees) return;
-    
-    // Hero
+
     setImageSrc('.sub-hero-image', fees.hero_image);
     setText('.sub-hero-subtitle', fees.hero_subtitle);
-    
-    // Day Scholars & Boarders
+
     const feeCards = document.querySelectorAll('#fees-structure-title + .container .info-card');
     if (feeCards[0]) setText(feeCards[0].querySelector('p'), fees.day_scholars);
     if (feeCards[1]) setText(feeCards[1].querySelector('p'), fees.boarders);
-    
-    // Payment Method
+
     setText('#payment-method-title + .container .page-content-card p:nth-of-type(2)', fees.payment_method);
-    
-    // Bank Details
+
     const bankList = document.querySelector('#bank-details-title + .container .info-list');
     if (bankList) {
         bankList.innerHTML = `<li>${fees.bank_details}</li>`;
     }
-    
-    // Payment Instructions
+
     const instructionsOl = document.querySelector('#instructions-title + .container .info-list');
     if (instructionsOl && fees.payment_instructions) {
-        instructionsOl.innerHTML = fees.payment_instructions.map(step => 
+        instructionsOl.innerHTML = fees.payment_instructions.map(step =>
             `<li>${step}</li>`
         ).join('');
     }
-    
-    // Important Notes
+
     const notesList = document.querySelector('#notes-title + .container .info-list');
     if (notesList && fees.important_notes) {
-        notesList.innerHTML = fees.important_notes.map(note => 
+        notesList.innerHTML = fees.important_notes.map(note =>
             `<li>${note}</li>`
         ).join('');
     }
@@ -569,29 +593,25 @@ async function loadContactPage() {
     const contact = await fetchCMSData('/content/contact.yml');
     const settings = await fetchCMSData('/content/settings.yml');
     if (!contact) return;
-    
-    // Hero
+
     setImageSrc('.sub-hero-image', contact.hero_image);
     setText('.sub-hero-subtitle', contact.hero_subtitle);
-    
-    // Contact info cards
+
     const infoCards = document.querySelectorAll('#contact-info-title + .container .info-card');
     if (infoCards[0]) setText(infoCards[0].querySelector('p'), contact.physical_address);
     if (infoCards[1] && settings) setText(infoCards[1].querySelector('p'), settings.postal_address);
     if (infoCards[2]) setText(infoCards[2].querySelector('p'), contact.town_county);
     if (infoCards[3] && settings) setText(infoCards[3].querySelector('p'), settings.email);
     if (infoCards[4] && settings) setText(infoCards[4].querySelector('p'), settings.phone);
-    
-    // Map
+
     const mapIframe = document.querySelector('.map-card iframe');
     if (mapIframe && contact.map_embed) {
         mapIframe.src = contact.map_embed;
     }
-    
-    // Office Hours
+
     const hoursList = document.querySelector('.map-card .info-list');
     if (hoursList && contact.office_hours) {
-        hoursList.innerHTML = contact.office_hours.map(hour => 
+        hoursList.innerHTML = contact.office_hours.map(hour =>
             `<li>${hour}</li>`
         ).join('');
     }
@@ -604,12 +624,10 @@ async function loadContactPage() {
 async function loadStudentLifePage() {
     const studentLife = await fetchCMSData('/content/student-life.yml');
     if (!studentLife) return;
-    
-    // Hero
+
     setImageSrc('.sub-hero-image', studentLife.hero_image);
     setText('.sub-hero-subtitle', studentLife.hero_subtitle);
-    
-    // Houses gallery
+
     if (studentLife.houses && studentLife.houses.length > 0) {
         const galleryTrack = document.querySelector('#houses-title + .container .gallery-track');
         if (galleryTrack) {
@@ -628,37 +646,89 @@ async function loadStudentLifePage() {
 // ============================================
 
 async function loadNewsPage() {
-    // Fetch all news articles from the news folder
-    try {
-        // Since we can't list directory contents with static JS,
-        // we'll load individual news files if they exist
-        const newsGrid = document.querySelector('.news-grid-page');
-        if (!newsGrid) return;
-        
-        // Try to load known news files
-        const newsFiles = [];
-        // This is a simplified approach - in production, you'd use
-        // Netlify Functions or a build step to list all news files
-        
-        if (newsFiles.length === 0) {
-            // Keep the "coming soon" placeholders
-            return;
-        }
-        
-        // If we have news, populate the grid
-        // (This will be more useful once news articles are created via CMS)
-    } catch (error) {
-        console.warn('CMS: Could not load news articles', error);
+    const data = await fetchCMSData('/content/news.yml');
+    if (!data) return;
+
+    function articleCard(article) {
+        const imgHtml = article.image
+            ? `<div class="news-card-image"><img src="${article.image}" alt="${article.title}" /></div>`
+            : '';
+        const dateFormatted = article.date ? new Date(article.date).toLocaleDateString('en-KE', { year: 'numeric', month: 'long', day: 'numeric' }) : '';
+        return `
+            <article class="news-card-page" data-category="${(article.category || '').toLowerCase()}">
+                ${imgHtml}
+                <div class="news-card-content">
+                    <span class="news-category">${article.category || ''}</span>
+                    <h3>${article.title}</h3>
+                    ${dateFormatted ? `<time datetime="${article.date}">${dateFormatted}</time>` : ''}
+                    <p>${article.summary || ''}</p>
+                    ${article.body ? `<div class="news-body">${simpleMarkdownToHTML(article.body)}</div>` : ''}
+                </div>
+            </article>
+        `;
+    }
+
+    // Featured article
+    const featuredContainer = document.getElementById('featured-container');
+    if (featuredContainer && data.featured && data.featured.title) {
+        featuredContainer.innerHTML = `
+            <article class="page-content-card featured-news-card">
+                ${articleCard(data.featured)}
+            </article>
+        `;
+    } else if (featuredContainer) {
+        featuredContainer.innerHTML = `<p class="no-news">No featured article yet. Check back soon!</p>`;
+    }
+
+    // All articles
+    const grid = document.getElementById('articles-grid');
+    if (grid && data.articles && data.articles.length > 0) {
+        grid.innerHTML = data.articles.map(articleCard).join('');
+    } else if (grid) {
+        grid.innerHTML = `<p class="no-news">No articles yet. News will appear here once published.</p>`;
+    }
+
+    // Filtering
+    const filterBtns = document.querySelectorAll('.news-filter-btn');
+    const searchInput = document.querySelector('.news-search');
+    const cards = document.querySelectorAll('.news-card-page');
+
+    function filterCards() {
+        const activeFilter = document.querySelector('.news-filter-btn.active')?.getAttribute('data-filter') || 'all';
+        const query = searchInput?.value.toLowerCase() || '';
+        cards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            const text = card.textContent.toLowerCase();
+            const matchFilter = activeFilter === 'all' || category === activeFilter;
+            const matchSearch = query === '' || text.includes(query);
+            card.style.display = matchFilter && matchSearch ? '' : 'none';
+        });
+    }
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            filterCards();
+        });
+    });
+
+    if (searchInput) {
+        searchInput.addEventListener('input', filterCards);
+    }
+
+    const loadMoreBtn = document.querySelector('.load-more-btn');
+    if (loadMoreBtn) {
+        loadMoreBtn.style.display = 'none';
     }
 }
 
 // ============================================
-// PAGE DETECTOR - Figures out which page we're on
+// PAGE DETECTOR
 // ============================================
 
 function getCurrentPage() {
     const path = window.location.pathname;
-    
     if (path.endsWith('index.html') || path === '/' || path.endsWith('/')) return 'home';
     if (path.includes('about')) return 'about';
     if (path.includes('leadership')) return 'leadership';
@@ -669,7 +739,6 @@ function getCurrentPage() {
     if (path.includes('contact')) return 'contact';
     if (path.includes('student-life')) return 'student-life';
     if (path.includes('news')) return 'news';
-    
     return 'unknown';
 }
 
@@ -678,12 +747,9 @@ function getCurrentPage() {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', async function() {
-    // Load global settings first (shared across all pages)
     await loadGlobalSettings();
-    
-    // Detect current page and load specific content
+
     const page = getCurrentPage();
-    
     switch(page) {
         case 'home':
             await loadHomepage();
@@ -716,6 +782,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             await loadNewsPage();
             break;
     }
-    
+
     console.log(`CMS: Content loaded for ${page} page`);
 });

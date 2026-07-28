@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <!-- YAML Parser for CMS Data -->
-<script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="icon" type="image/png" href="images/branding/favicon.png" />
@@ -60,7 +60,7 @@
     <main id="main-content">
         <section class="sub-page-hero" aria-label="News page title">
             <div class="sub-hero-background">
-                <img src="images/hero/news-hero.jpg" alt="News hero image" class="sub-hero-image" />
+                <img src="" alt="" class="sub-hero-image" />
                 <div class="sub-hero-placeholder">
                     <span>📸 news-hero.jpg</span>
                     <small>/images/hero/</small>
@@ -75,16 +75,15 @@
             </div>
         </section>
 
+        <!-- Featured News (dynamic) -->
         <section class="page-section reveal" aria-labelledby="featured-title">
             <div class="container">
                 <h2 id="featured-title" class="section-title">Featured News</h2>
-                <article class="page-content-card featured-news-card">
-                    <h3>Coming Soon</h3>
-                    <p>The latest news article will appear here when the school content is ready for publication.</p>
-                </article>
+                <div id="featured-container"></div>
             </div>
         </section>
 
+        <!-- All Articles (dynamic) -->
         <section class="page-section alt-section reveal" aria-labelledby="news-title">
             <div class="container">
                 <h2 id="news-title" class="section-title">Latest Updates</h2>
@@ -98,34 +97,9 @@
                         <button class="news-filter-btn" data-filter="announcement">Announcements</button>
                     </div>
                 </div>
-                <div class="news-grid-page">
-                    <article class="news-card-page" data-category="announcement">
-                        <h3>School Announcement</h3>
-                        <p>Coming soon —  official announcements.</p>
-                    </article>
-                    <article class="news-card-page" data-category="academic">
-                        <h3>Academic Update</h3>
-                        <p>Coming soon — academic highlights.</p>
-                    </article>
-                    <article class="news-card-page" data-category="sports">
-                        <h3>Sports Update</h3>
-                        <p>Coming soon —  sports news.</p>
-                    </article>
-                    <article class="news-card-page" data-category="events">
-                        <h3>Upcoming Event</h3>
-                        <p>Coming soon —  school events.</p>
-                    </article>
-                </div>
-                <div class="news-skeletons" aria-hidden="true">
-                    <div class="news-card-page skeleton-card">
-                        <div class="skeleton-shimmer"></div>
-                    </div>
-                    <div class="news-card-page skeleton-card">
-                        <div class="skeleton-shimmer"></div>
-                    </div>
-                </div>
+                <div id="articles-grid" class="news-grid-page"></div>
                 <div class="news-pagination">
-                    <button class="btn btn-secondary" type="button">Load More</button>
+                    <button class="btn btn-secondary load-more-btn" type="button" style="display:none;">Load More</button>
                 </div>
             </div>
         </section>
@@ -151,7 +125,7 @@
                         <li><a href="admissions.html">Admissions</a></li>
                         <li><a href="fees-payments.html">Fees & Payments</a></li>
                         <li><a href="contact.html">Contact</a></li>
-                        <li><a> href="student-life.html">student life</a>
+                        <li><a href="student-life.html">Student Life</a></li>
                     </ul>
                 </div>
 
@@ -191,6 +165,6 @@
     <script src="js/carousel.js"></script>
     <script src="js/animations.js"></script>
     <!-- CMS Data Loader -->
-<script src="js/cms-loader.js"></script>
+    <script src="js/cms-loader.js"></script>
 </body>
 </html>
