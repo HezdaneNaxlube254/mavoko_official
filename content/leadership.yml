@@ -1,90 +1,104 @@
 hero_image: images/hero/leadership-hero.jpg
-hero_subtitle: A dedicated team guiding the school with professionalism, integrity, and service.
+hero_subtitle: A dedicated team guiding the school with professionalism,
+  integrity, and service.
 principal:
   name: Ali H. Ali
   title: Senior Principal
   photo: /images/uploads/1000245499.png
-  bio: It is my honor and privilege to welcome you to Mavoko Boys' School, a center of academic excellence and holistic development. Our dedicated team of educators is committed to nurturing every student's potential, fostering discipline, and building character. We believe in preparing our learners not just for examinations, but for life. Together with parents and the community, we strive to create an environment where every boy can thrive, excel, and become a responsible citizen. Welcome to our school family.
-  quote: We are committed to nurturing every student's potential and building a community where excellence is lived every day.
+  bio: It is my honor and privilege to welcome you to Mavoko Boys' School, a
+    center of academic excellence and holistic development. Our dedicated team
+    of educators is committed to nurturing every student's potential, fostering
+    discipline, and building character. We believe in preparing our learners not
+    just for examinations, but for life. Together with parents and the
+    community, we strive to create an environment where every boy can thrive,
+    excel, and become a responsible citizen. Welcome to our school family.
+  quote: We are committed to nurturing every student's potential and building a
+    community where excellence is lived every day.
 deputies:
   - name: Stella Maris Obed
     title: Deputy Principal, Administration
     photo: images/leadership/deputy_admin_stella_maris.jpg
-    bio: Dedicated to maintaining discipline, overseeing school administration, and fostering holistic student development. With years of experience in educational leadership, Stella Maris ensures smooth day-to-day operations and a conducive learning environment.
+    bio: Dedicated to maintaining discipline, overseeing school administration, and
+      fostering holistic student development. With years of experience in
+      educational leadership, Stella Maris ensures smooth day-to-day operations
+      and a conducive learning environment.
   - name: Penninah Nzioki
     title: Deputy Principal, Academics
     photo: /images/uploads/1000245500.png
-    bio: Committed to academic excellence, curriculum implementation, and driving student performance outcomes. Penninah works closely with the Dean of studies and Heads of Departments to ensure quality teaching and learning across all subjects.
+    bio: Committed to academic excellence, curriculum implementation, and driving
+      student performance outcomes. Penninah works closely with the Dean of
+      studies and Heads of Departments to ensure quality teaching and learning
+      across all subjects.
 bom_chair:
-  name: "Justine Mbula"
-  title: "Chairperson, Board of Management"
-  photo: "images/leadership/bom_chair_justine_mbula.jpg"
-  message: "We remain committed to supporting the school's vision through sound governance, strategic guidance, and a shared dedication to the boys' holistic growth and academic success."
-pa_status: "Parents Association Chairperson — position currently vacant, election in progress."
+  name: Justine Mbula
+  title: Chairperson, Board of Management
+  photo: images/leadership/bom_chair_justine_mbula.jpg
+  message: We remain committed to supporting the school's vision through sound
+    governance, strategic guidance, and a shared dedication to the boys'
+    holistic growth and academic success.
+pa_status: Parents Association Chairperson — position currently vacant, election
+  in progress.
 admin_team:
-  - name: ""
-    title: "Senior Teacher"
-    photo: "images/leadership/senior_teacher.jpg"
-    icon: "fa-star"
-    description: "Overseeing teacher development, mentorship, and curriculum support"
-  - name: ""
-    title: "Dean of Studies"
-    photo: "images/leadership/hod_dean_studies.jpg"
-    icon: "fa-chart-line"
-    description: "Overseeing curriculum implementation and academic performance"
-  - name: ""
-    title: "School Chaplain"
-    photo: "images/leadership/school_chaplain.jpg"
-    icon: "fa-hands-praying"
-    description: "Providing spiritual guidance and pastoral care to students and staff"
+  - name: MR.NDAMBUKI
+    title: Senior Teacher
+    photo: images/leadership/senior_teacher.jpg
+    icon: fa-star
+    description: Overseeing teacher development, mentorship, and curriculum support
+  - name: MRS.PETER
+    title: Dean of Studies
+    photo: images/leadership/hod_dean_studies.jpg
+    icon: fa-chart-line
+    description: Overseeing curriculum implementation and academic performance
+  - name: MRS.WASUA
+    title: School Chaplain
+    photo: images/leadership/school_chaplain.jpg
+    icon: fa-hands-praying
+    description: Providing spiritual guidance and pastoral care to students and staff
 hods:
-  - name: ""
-    department: "Languages"
-    photo: "images/leadership/hod_languages.jpg"
-    icon: "fa-book"
-    description: "Developing communication skills and cultural literacy through English and Kiswahili"
-  - name: ""
-    department: "Mathematics"
-    photo: "images/leadership/hod_mathematics.jpg"
-    icon: "fa-calculator"
-    description: "Building strong analytical skills through group discussion and peer teaching"
-  - name: ""
-    department: "Sciences"
-    photo: "images/leadership/hod_science.jpg"
-    icon: "fa-flask"
-    description: "Preparing students for STEM pathways including medicine and engineering"
-  - name: ""
-    department: "Humanities"
-    photo: "images/leadership/hod_humanities.jpg"
-    icon: "fa-landmark"
-    description: "Building critical thinking and civic understanding"
-  - name: ""
-    department: "Technical"
-    photo: "images/leadership/hod_technical.jpg"
-    icon: "fa-tools"
-    description: "Developing practical, hands-on skills for careers and entrepreneurship"
-  - name: ""
-    department: "Boarding"
-    photo: "images/leadership/hod_boarding.jpg"
-    icon: "fa-bed"
-    description: "Managing student welfare and residential life"
-  - name: ""
-    department: "Day Schooling"
-    photo: "images/leadership/hod_day_schooling.jpg"
-    icon: "fa-school"
-    description: "Coordinating safe, orderly entry and departure of day scholars"
-  - name: ""
-    department: "Guidance & Counselling"
-    photo: "images/leadership/hod_guidance.jpg"
-    icon: "fa-heart-circle-check"
-    description: "Supporting student mental health and personal development"
-  - name: ""
-    department: "Careers"
-    photo: "images/leadership/hod_careers.jpg"
-    icon: "fa-briefcase"
-    description: "Guiding subject selection and post-KCSE placement"
-  - name: ""
-    department: "Library"
-    photo: "images/leadership/hod_library.jpg"
-    icon: "fa-book-open"
-    description: "Supporting academic excellence through research and reading"
+  - name: MRS.OMBOGO
+    department: Languages
+    photo: images/leadership/hod_languages.jpg
+    icon: fa-book
+    description: Developing communication skills and cultural literacy through
+      English and Kiswahili
+  - name: MRS.KIZITO
+    department: Mathematics
+    photo: images/leadership/hod_mathematics.jpg
+    icon: fa-calculator
+    description: Building strong analytical skills through group discussion and peer
+      teaching
+  - name: MR/MRS
+    department: Sciences
+    photo: /images/uploads/images.jpg
+    icon: fa-flask
+    description: Preparing students for STEM pathways including medicine and engineering
+  - name: MRS.ODUOR
+    department: Humanities
+    photo: images/leadership/hod_humanities.jpg
+    icon: fa-landmark
+    description: Building critical thinking and civic understanding
+  - name: Madam Susan
+    department: Technical
+    photo: images/leadership/hod_technical.jpg
+    icon: fa-tools
+    description: Developing practical, hands-on skills for careers and entrepreneurship
+  - name: MR.MBUVI
+    department: Boarding
+    photo: images/leadership/hod_boarding.jpg
+    icon: fa-bed
+    description: Managing student welfare and residential life
+  - name: MR.WAMBUA
+    department: Day Schooling
+    photo: images/leadership/hod_day_schooling.jpg
+    icon: fa-school
+    description: Coordinating safe, orderly entry and departure of day scholars
+  - name: MR.MULEI
+    department: Guidance & Counselling
+    photo: images/leadership/hod_guidance.jpg
+    icon: fa-heart-circle-check
+    description: Supporting student mental health and personal development
+  - name: Madam.
+    department: Library
+    photo: images/leadership/hod_library.jpg
+    icon: fa-book-open
+    description: Supporting academic excellence through research and reading
