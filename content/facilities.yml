@@ -7,7 +7,7 @@ facilities_list:
     image: images/facilities/library_interior.jpg
   - name: Science Laboratories (2)
     description: Fully equipped labs for practical learning and experiments
-    image: images/facilities/laboratory_science.jpg
+    image: /images/uploads/whatsapp-image-2026-07-28-at-9.37.13-pm.jpeg
   - name: Computer Lab
     description: Modern computer facilities for digital literacy and ICT skills
     image: images/facilities/computer_lab.jpg
