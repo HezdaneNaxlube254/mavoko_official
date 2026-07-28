@@ -69,7 +69,7 @@ hods:
       teaching
   - name: MR/MRS
     department: Sciences
-    photo: /images/uploads/images.jpg
+    photo: /images/uploads/whatsapp-image-2026-07-28-at-9.03.04-pm-1-.jpeg
     icon: fa-flask
     description: Preparing students for STEM pathways including medicine and engineering
   - name: MRS.ODUOR
@@ -99,6 +99,6 @@ hods:
     description: Supporting student mental health and personal development
   - name: Madam.
     department: Library
-    photo: images/leadership/hod_library.jpg
+    photo: /images/uploads/whatsapp-image-2026-07-28-at-9.03.04-pm.jpeg
     icon: fa-book-open
     description: Supporting academic excellence through research and reading
