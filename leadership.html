@@ -39,20 +39,22 @@
             object-fit: cover;
             display: block;
         }
-        .hod-overlay {
+        /* Name badge: small white rounded rectangle, bottom-right corner */
+        .hod-name-badge {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            color: white;
-            padding: 1rem;
+            bottom: 10px;
+            right: 10px;
+            background: white;
+            color: #000;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
             transition: opacity 0.3s;
         }
-        .hod-overlay .hod-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin: 0;
+        .hod-card:hover .hod-name-badge {
+            opacity: 0;
         }
         .hod-content {
             padding: 1rem;
@@ -74,9 +76,6 @@
             font-size: 0.9rem;
             line-height: 1.4;
             display: none;
-        }
-        .hod-card:hover .hod-overlay {
-            opacity: 0;
         }
         .hod-card:hover .hod-comment {
             display: block;

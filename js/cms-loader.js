@@ -71,7 +71,7 @@ function simpleMarkdownToHTML(md) {
 }
 
 // ============================================
-// GLOBAL SETTINGS
+// GLOBAL SETTINGS (Shared across all pages)
 // ============================================
 
 async function loadGlobalSettings() {
@@ -226,7 +226,7 @@ async function loadHomepage() {
 }
 
 // ============================================
-// ABOUT PAGE LOADER (unchanged except image handling)
+// ABOUT PAGE LOADER
 // ============================================
 
 async function loadAboutPage() {
@@ -252,7 +252,7 @@ async function loadAboutPage() {
 }
 
 // ============================================
-// LEADERSHIP PAGE LOADER (with name overlay on HOD images)
+// LEADERSHIP PAGE LOADER (with HOD name badge)
 // ============================================
 
 async function loadLeadershipPage() {
@@ -341,17 +341,17 @@ async function loadLeadershipPage() {
     const paDiv = document.getElementById('pa-container');
     if (paDiv) paDiv.innerHTML = `<p>${data.pa_status || ''}</p>`;
 
-    // Administration Team (same HOD card style with hover effects)
+    // Administration Team (with name badge)
     if (data.admin_team && data.admin_team.length > 0) {
         const container = document.getElementById('admin-team-container');
         if (container) {
-            container.innerHTML = data.admin_team.map(member => `
+            container.innerHTML = data.admin_team.map(member => {
+                const displayName = member.name && member.name.trim() !== '' ? member.name : member.title;
+                return `
                 <article class="hod-card">
                     <div class="hod-image-bg">
-                        <img src="${member.photo || ''}" alt="${member.title}" class="hod-bg-image" />
-                        <div class="hod-overlay">
-                            <p class="hod-name">${member.title}</p>
-                        </div>
+                        <img src="${member.photo || ''}" alt="${displayName}" class="hod-bg-image" />
+                        <span class="hod-name-badge">${displayName}</span>
                     </div>
                     <div class="hod-content">
                         <i class="fas ${member.icon || 'fa-user'} hod-icon"></i>
@@ -359,11 +359,12 @@ async function loadLeadershipPage() {
                     </div>
                     <p class="hod-comment">${member.description}</p>
                 </article>
-            `).join('');
+                `;
+            }).join('');
         }
     }
 
-    // Heads of Departments (with name overlay from hod.name, fallback to department)
+    // Heads of Departments (with name badge)
     if (data.hods && data.hods.length > 0) {
         const container = document.getElementById('hods-container');
         if (container) {
@@ -373,9 +374,7 @@ async function loadLeadershipPage() {
                 <article class="hod-card">
                     <div class="hod-image-bg">
                         <img src="${hod.photo || ''}" alt="${displayName}" class="hod-bg-image" />
-                        <div class="hod-overlay">
-                            <p class="hod-name">${displayName}</p>
-                        </div>
+                        <span class="hod-name-badge">${displayName}</span>
                     </div>
                     <div class="hod-content">
                         <i class="fas ${hod.icon || 'fa-book'} hod-icon"></i>
@@ -427,7 +426,25 @@ async function loadAcademicsPage() {
             }
         });
     }
-    // ... rest of academics loader identical to previous version
+
+    const calendarCard = document.querySelector('#calendar-title + .container .page-content-card ul');
+    if (calendarCard && academics.calendar) calendarCard.innerHTML = simpleMarkdownToHTML(academics.calendar);
+
+    const ratioCard = document.querySelector('.ratio-card div');
+    if (ratioCard && academics.facilities_text) ratioCard.innerHTML = simpleMarkdownToHTML(academics.facilities_text);
+
+    const achievementsCard = document.querySelector('#achievements-title + .container .page-content-card');
+    if (achievementsCard && academics.achievements) achievementsCard.innerHTML = simpleMarkdownToHTML(academics.achievements);
+
+    if (academics.support_programs && academics.support_programs.length > 0) {
+        const supportCards = document.querySelectorAll('#support-title + .container .info-card');
+        academics.support_programs.forEach((program, i) => {
+            if (supportCards[i]) {
+                setText(supportCards[i].querySelector('h3'), program.name);
+                setText(supportCards[i].querySelector('p'), program.description);
+            }
+        });
+    }
 }
 
 // ============================================
@@ -465,7 +482,33 @@ async function loadAdmissionsPage() {
     if (!admissions) return;
     setImageSrc('.sub-hero-image', admissions.hero_image);
     setText('.sub-hero-subtitle', admissions.hero_subtitle);
-    // ... same as before (omitted for brevity, but kept in actual file)
+
+    setText('#period-title + .container .page-content-card p', admissions.period);
+    setHTML('#requirements', simpleMarkdownToHTML(admissions.requirements));
+
+    const docList = document.querySelector('#documents .check-list');
+    if (docList && admissions.documents) {
+        docList.innerHTML = admissions.documents.map(doc =>
+            `<li><i class="fas fa-check"></i> ${doc}</li>`
+        ).join('');
+    }
+
+    setHTML('#fees', simpleMarkdownToHTML(admissions.fees_tab));
+
+    const checklistOl = document.querySelector('#checklist-title + .container .info-list');
+    if (checklistOl && admissions.checklist) {
+        checklistOl.innerHTML = admissions.checklist.map(step =>
+            `<li>${step}</li>`
+        ).join('');
+    }
+
+    const contactSection = document.querySelector('#contact-admissions-title + .container');
+    if (contactSection) {
+        const pPhone = contactSection.querySelector('p:nth-of-type(2)');
+        const pEmail = contactSection.querySelector('p:nth-of-type(3)');
+        if (pPhone) pPhone.innerHTML = `<strong>Phone:</strong> ${admissions.admissions_phone}`;
+        if (pEmail) pEmail.innerHTML = `<strong>Email:</strong> ${admissions.admissions_email}`;
+    }
 }
 
 // ============================================
@@ -477,7 +520,25 @@ async function loadFeesPage() {
     if (!fees) return;
     setImageSrc('.sub-hero-image', fees.hero_image);
     setText('.sub-hero-subtitle', fees.hero_subtitle);
-    // ... same as before
+
+    const feeCards = document.querySelectorAll('#fees-structure-title + .container .info-card');
+    if (feeCards[0]) setText(feeCards[0].querySelector('p'), fees.day_scholars);
+    if (feeCards[1]) setText(feeCards[1].querySelector('p'), fees.boarders);
+
+    setText('#payment-method-title + .container .page-content-card p:nth-of-type(2)', fees.payment_method);
+
+    const bankList = document.querySelector('#bank-details-title + .container .info-list');
+    if (bankList) bankList.innerHTML = `<li>${fees.bank_details}</li>`;
+
+    const instructionsOl = document.querySelector('#instructions-title + .container .info-list');
+    if (instructionsOl && fees.payment_instructions) {
+        instructionsOl.innerHTML = fees.payment_instructions.map(step => `<li>${step}</li>`).join('');
+    }
+
+    const notesList = document.querySelector('#notes-title + .container .info-list');
+    if (notesList && fees.important_notes) {
+        notesList.innerHTML = fees.important_notes.map(note => `<li>${note}</li>`).join('');
+    }
 }
 
 // ============================================
@@ -490,7 +551,21 @@ async function loadContactPage() {
     if (!contact) return;
     setImageSrc('.sub-hero-image', contact.hero_image);
     setText('.sub-hero-subtitle', contact.hero_subtitle);
-    // ... same as before
+
+    const infoCards = document.querySelectorAll('#contact-info-title + .container .info-card');
+    if (infoCards[0]) setText(infoCards[0].querySelector('p'), contact.physical_address);
+    if (infoCards[1] && settings) setText(infoCards[1].querySelector('p'), settings.postal_address);
+    if (infoCards[2]) setText(infoCards[2].querySelector('p'), contact.town_county);
+    if (infoCards[3] && settings) setText(infoCards[3].querySelector('p'), settings.email);
+    if (infoCards[4] && settings) setText(infoCards[4].querySelector('p'), settings.phone);
+
+    const mapIframe = document.querySelector('.map-card iframe');
+    if (mapIframe && contact.map_embed) mapIframe.src = contact.map_embed;
+
+    const hoursList = document.querySelector('.map-card .info-list');
+    if (hoursList && contact.office_hours) {
+        hoursList.innerHTML = contact.office_hours.map(hour => `<li>${hour}</li>`).join('');
+    }
 }
 
 // ============================================
@@ -502,6 +577,7 @@ async function loadStudentLifePage() {
     if (!studentLife) return;
     setImageSrc('.sub-hero-image', studentLife.hero_image);
     setText('.sub-hero-subtitle', studentLife.hero_subtitle);
+
     if (studentLife.houses && studentLife.houses.length > 0) {
         const galleryTrack = document.querySelector('#houses-title + .container .gallery-track');
         if (galleryTrack) {
@@ -523,7 +599,7 @@ async function loadNewsPage() {
     const data = await fetchCMSData('/content/news.yml');
     if (!data) return;
 
-    // Set hero
+    // Set hero image and subtitle from CMS
     if (data.hero_image) setImageSrc('.sub-hero-image', data.hero_image);
     if (data.hero_subtitle) setText('.sub-hero-subtitle', data.hero_subtitle);
 
@@ -546,12 +622,12 @@ async function loadNewsPage() {
         `;
     }
 
-    // Featured
+    // Featured article
     const featuredContainer = document.getElementById('featured-container');
     if (featuredContainer && data.featured && data.featured.title) {
         featuredContainer.innerHTML = `<div class="featured-news-card">${articleCard(data.featured)}</div>`;
     } else if (featuredContainer) {
-        featuredContainer.innerHTML = `<p class="no-news">No featured article yet.</p>`;
+        featuredContainer.innerHTML = `<p class="no-news">No featured article yet. Check back soon!</p>`;
     }
 
     // All articles
@@ -559,7 +635,7 @@ async function loadNewsPage() {
     if (grid && data.articles && data.articles.length > 0) {
         grid.innerHTML = data.articles.map(articleCard).join('');
     } else if (grid) {
-        grid.innerHTML = `<p class="no-news">No articles yet.</p>`;
+        grid.innerHTML = `<p class="no-news">No articles yet. News will appear here once published.</p>`;
     }
 
     // Filtering
