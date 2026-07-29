@@ -259,7 +259,7 @@ async function loadAboutPage() {
 }
 
 // ============================================
-// LEADERSHIP PAGE LOADER (FIXED bio toggle – using CSS class `open`)
+// LEADERSHIP PAGE LOADER (FIXED bio toggle with event delegation)
 // ============================================
 
 async function loadLeadershipPage() {
@@ -391,31 +391,30 @@ async function loadLeadershipPage() {
         }
     }
 
-    // ---- Toggle bios – attach listeners directly to each button ----
-    document.querySelectorAll('.collapse-toggle').forEach(btn => {
-        // Remove previous listeners by cloning (optional, but safe)
-        const newBtn = btn.cloneNode(true);
-        btn.parentNode.replaceChild(newBtn, btn);
-
-        newBtn.addEventListener('click', function() {
-            // Find the sibling .collapse-content
-            const content = this.parentElement.querySelector('.collapse-content');
+    // ---- Bio toggle using event delegation (fired once per page) ----
+    if (!window._collapseListenerAdded) {
+        document.addEventListener('click', function(e) {
+            const btn = e.target.closest('.collapse-toggle');
+            if (!btn) return;
+            const content = btn.parentElement.querySelector('.collapse-content');
             if (!content) return;
 
             const isOpen = content.classList.contains('open');
             if (isOpen) {
                 content.classList.remove('open');
-                this.setAttribute('aria-expanded', 'false');
-                const icon = this.querySelector('.toggle-icon');
-                if (icon) icon.textContent = '▶';
+                btn.setAttribute('aria-expanded', 'false');
             } else {
                 content.classList.add('open');
-                this.setAttribute('aria-expanded', 'true');
-                const icon = this.querySelector('.toggle-icon');
-                if (icon) icon.textContent = '▼';
+                btn.setAttribute('aria-expanded', 'true');
+            }
+            // Toggle icon arrow
+            const icon = btn.querySelector('.toggle-icon');
+            if (icon) {
+                icon.textContent = isOpen ? '▶' : '▼';
             }
         });
-    });
+        window._collapseListenerAdded = true;
+    }
 }
 
 // ============================================
