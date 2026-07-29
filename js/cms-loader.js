@@ -119,7 +119,7 @@ async function loadGlobalSettings() {
 }
 
 // ============================================
-// HOMEPAGE LOADER
+// HOMEPAGE LOADER (UPDATED – uses restartHeroCarousel)
 // ============================================
 
 async function loadHomepage() {
@@ -128,30 +128,39 @@ async function loadHomepage() {
     const testimonials = await fetchCMSData('/content/testimonials.yml');
     if (!settings) return;
 
+    // ---- Hero Carousel – update existing slides, then restart carousel ----
     if (settings.hero_images && settings.hero_images.length > 0) {
-        const carouselSlides = document.getElementById('heroCarousel');
-        const bgContainer = document.querySelector('.hero-backgrounds');
-        if (carouselSlides) {
-            carouselSlides.innerHTML = settings.hero_images.map((slide, i) => `
-                <div class="carousel-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
-                    <span class="carousel-eyebrow">${slide.caption || ''}</span>
-                    <h2 class="carousel-statement">${slide.caption_text || ''}</h2>
-                </div>
-            `).join('');
-        }
-        if (bgContainer) {
-            bgContainer.innerHTML = settings.hero_images.map((slide, i) => `
-                <div class="hero-bg-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
-                    <img src="${slide.image}" alt="${slide.alt_text || ''}" class="hero-image" />
-                </div>
-            `).join('');
+        const slides = document.querySelectorAll('#heroCarousel .carousel-slide');
+        const bgSlides = document.querySelectorAll('.hero-backgrounds .hero-bg-slide');
+
+        settings.hero_images.forEach((slide, i) => {
+            if (slides[i]) {
+                const eyebrow = slides[i].querySelector('.carousel-eyebrow');
+                const statement = slides[i].querySelector('.carousel-statement');
+                if (eyebrow) eyebrow.textContent = slide.caption || '';
+                if (statement) statement.textContent = slide.caption_text || '';
+            }
+            if (bgSlides[i]) {
+                const img = bgSlides[i].querySelector('.hero-image');
+                if (img) {
+                    img.src = slide.image || '';
+                    img.alt = slide.alt_text || '';
+                }
+            }
+        });
+
+        // Restart the hero carousel after content update
+        if (typeof window.restartHeroCarousel === 'function') {
+            window.restartHeroCarousel();
         }
     }
 
+    // VMM cards
     setText('.vmm-card:nth-child(1) p', settings.motto_quote);
     setText('.vmm-card:nth-child(2) p', settings.vision);
     setText('.vmm-card:nth-child(3) p', settings.mission);
 
+    // Stats
     if (homepage && homepage.stats) {
         const stats = homepage.stats;
         const statNumbers = document.querySelectorAll('.stat-number');
@@ -165,6 +174,7 @@ async function loadHomepage() {
         }
     }
 
+    // Homepage facilities
     if (homepage && homepage.home_facilities) {
         const facilityCards = document.querySelectorAll('.facilities-preview .facility-card');
         homepage.home_facilities.forEach((facility, i) => {
@@ -179,6 +189,7 @@ async function loadHomepage() {
         });
     }
 
+    // Achievements
     if (homepage && homepage.achievements) {
         const achievementCards = document.querySelectorAll('.achievement-card');
         homepage.achievements.forEach((achievement, i) => {
@@ -193,6 +204,7 @@ async function loadHomepage() {
         });
     }
 
+    // Gallery (homepage)
     if (homepage && homepage.gallery) {
         const galleryTrack = document.querySelector('#galleryCarousel .gallery-track');
         if (galleryTrack) {
@@ -205,6 +217,7 @@ async function loadHomepage() {
         }
     }
 
+    // Testimonials
     if (testimonials && testimonials.items) {
         const testimonialCards = document.querySelectorAll('.testimonial-card');
         testimonials.items.forEach((item, i) => {
@@ -219,6 +232,7 @@ async function loadHomepage() {
         });
     }
 
+    // CTA
     if (homepage) {
         setText('.cta-banner .cta-content h2', homepage.cta_heading);
         setText('.cta-banner .cta-content p', homepage.cta_text);
@@ -252,7 +266,7 @@ async function loadAboutPage() {
 }
 
 // ============================================
-// LEADERSHIP PAGE LOADER (with HOD name badge)
+// LEADERSHIP PAGE LOADER (FIXED bio toggle)
 // ============================================
 
 async function loadLeadershipPage() {
@@ -271,15 +285,14 @@ async function loadLeadershipPage() {
                 <article class="profile-card principal-card">
                     <div class="profile-image-wrap">
                         <img src="${p.photo || ''}" alt="${p.name}" class="profile-image" />
-                        <div class="image-placeholder"><span>📁 ${p.photo || 'No image'}</span></div>
                     </div>
                     <div class="profile-content">
                         <h3>${p.name}</h3>
                         <p><strong>${p.title}</strong></p>
-                        <button class="collapse-toggle" aria-expanded="false" aria-controls="principalBio">
+                        <button class="collapse-toggle" data-target="principalBio">
                             <span class="toggle-icon">▶</span> Read Bio
                         </button>
-                        <div id="principalBio" class="collapse-content">${simpleMarkdownToHTML(p.bio)}</div>
+                        <div id="principalBio" class="collapse-content" style="display:none;">${simpleMarkdownToHTML(p.bio)}</div>
                     </div>
                 </article>
                 <blockquote class="principal-quote">
@@ -294,19 +307,18 @@ async function loadLeadershipPage() {
     if (data.deputies && data.deputies.length > 0) {
         const grid = document.getElementById('deputies-container');
         if (grid) {
-            grid.innerHTML = data.deputies.map(dep => `
+            grid.innerHTML = data.deputies.map((dep, idx) => `
                 <article class="profile-card deputy-card">
                     <div class="profile-image-wrap">
                         <img src="${dep.photo || ''}" alt="${dep.name}" class="profile-image" />
-                        <div class="image-placeholder"><span>📁 ${dep.photo || 'No image'}</span></div>
                     </div>
                     <div class="profile-content">
                         <h3>${dep.name}</h3>
                         <p><strong>${dep.title}</strong></p>
-                        <button class="collapse-toggle" aria-expanded="false" aria-controls="depBio-${dep.name.replace(/\s/g,'')}">
+                        <button class="collapse-toggle" data-target="depBio-${idx}">
                             <span class="toggle-icon">▶</span> Read Bio
                         </button>
-                        <div class="collapse-content">${simpleMarkdownToHTML(dep.bio)}</div>
+                        <div id="depBio-${idx}" class="collapse-content" style="display:none;">${simpleMarkdownToHTML(dep.bio)}</div>
                     </div>
                 </article>
             `).join('');
@@ -322,15 +334,14 @@ async function loadLeadershipPage() {
                 <article class="profile-card">
                     <div class="profile-image-wrap">
                         <img src="${b.photo || ''}" alt="${b.name}" class="profile-image" />
-                        <div class="image-placeholder"><span>📁 ${b.photo || 'No image'}</span></div>
                     </div>
                     <div class="profile-content">
                         <h3>${b.name}</h3>
                         <p><strong>${b.title}</strong></p>
-                        <button class="collapse-toggle" aria-expanded="false" aria-controls="bomBio">
+                        <button class="collapse-toggle" data-target="bomBio">
                             <span class="toggle-icon">▶</span> Read Message
                         </button>
-                        <div id="bomBio" class="collapse-content">${simpleMarkdownToHTML(b.message)}</div>
+                        <div id="bomBio" class="collapse-content" style="display:none;">${simpleMarkdownToHTML(b.message)}</div>
                     </div>
                 </article>
             `;
@@ -387,20 +398,20 @@ async function loadLeadershipPage() {
         }
     }
 
-    // Collapse toggles
-    document.querySelectorAll('.collapse-toggle').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const targetId = this.getAttribute('aria-controls');
-            const target = document.getElementById(targetId);
-            if (!target) return;
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
-            this.setAttribute('aria-expanded', !isExpanded);
-            target.classList.toggle('open');
-            const icon = this.querySelector('.toggle-icon');
-            if (icon) icon.textContent = isExpanded ? '▶' : '▼';
-            this.innerHTML = (isExpanded ? '▶ ' : '▼ ') + this.textContent.replace(/[▶▼]\s*/, '');
-            this.prepend(icon);
-        });
+    // ---- Simplified bio toggle using event delegation ----
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.collapse-toggle');
+        if (!btn) return;
+        const targetId = btn.getAttribute('data-target');
+        const target = document.getElementById(targetId);
+        if (!target) return;
+
+        const isOpen = target.style.display === 'block';
+        target.style.display = isOpen ? 'none' : 'block';
+        const icon = btn.querySelector('.toggle-icon');
+        if (icon) {
+            icon.textContent = isOpen ? '▶' : '▼';
+        }
     });
 }
 
@@ -599,7 +610,6 @@ async function loadNewsPage() {
     const data = await fetchCMSData('/content/news.yml');
     if (!data) return;
 
-    // Set hero image and subtitle from CMS
     if (data.hero_image) setImageSrc('.sub-hero-image', data.hero_image);
     if (data.hero_subtitle) setText('.sub-hero-subtitle', data.hero_subtitle);
 
@@ -622,7 +632,6 @@ async function loadNewsPage() {
         `;
     }
 
-    // Featured article
     const featuredContainer = document.getElementById('featured-container');
     if (featuredContainer && data.featured && data.featured.title) {
         featuredContainer.innerHTML = `<div class="featured-news-card">${articleCard(data.featured)}</div>`;
@@ -630,7 +639,6 @@ async function loadNewsPage() {
         featuredContainer.innerHTML = `<p class="no-news">No featured article yet. Check back soon!</p>`;
     }
 
-    // All articles
     const grid = document.getElementById('articles-grid');
     if (grid && data.articles && data.articles.length > 0) {
         grid.innerHTML = data.articles.map(articleCard).join('');
@@ -638,7 +646,6 @@ async function loadNewsPage() {
         grid.innerHTML = `<p class="no-news">No articles yet. News will appear here once published.</p>`;
     }
 
-    // Filtering
     const filterBtns = document.querySelectorAll('.news-filter-btn');
     const searchInput = document.querySelector('.news-search');
     const cards = document.querySelectorAll('.news-card-page');
