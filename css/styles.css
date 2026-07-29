@@ -3765,3 +3765,6 @@ textarea:focus {
 .stat-item.no-plus .stat-number::after {
     content: '';
 }
+.collapse-content.open {
+    display: block;
+}

@@ -155,12 +155,10 @@ async function loadHomepage() {
         }
     }
 
-    // VMM cards
     setText('.vmm-card:nth-child(1) p', settings.motto_quote);
     setText('.vmm-card:nth-child(2) p', settings.vision);
     setText('.vmm-card:nth-child(3) p', settings.mission);
 
-    // Stats
     if (homepage && homepage.stats) {
         const stats = homepage.stats;
         const statNumbers = document.querySelectorAll('.stat-number');
@@ -174,7 +172,6 @@ async function loadHomepage() {
         }
     }
 
-    // Homepage facilities
     if (homepage && homepage.home_facilities) {
         const facilityCards = document.querySelectorAll('.facilities-preview .facility-card');
         homepage.home_facilities.forEach((facility, i) => {
@@ -189,7 +186,6 @@ async function loadHomepage() {
         });
     }
 
-    // Achievements
     if (homepage && homepage.achievements) {
         const achievementCards = document.querySelectorAll('.achievement-card');
         homepage.achievements.forEach((achievement, i) => {
@@ -204,7 +200,6 @@ async function loadHomepage() {
         });
     }
 
-    // Gallery (homepage)
     if (homepage && homepage.gallery) {
         const galleryTrack = document.querySelector('#galleryCarousel .gallery-track');
         if (galleryTrack) {
@@ -217,7 +212,6 @@ async function loadHomepage() {
         }
     }
 
-    // Testimonials
     if (testimonials && testimonials.items) {
         const testimonialCards = document.querySelectorAll('.testimonial-card');
         testimonials.items.forEach((item, i) => {
@@ -232,7 +226,6 @@ async function loadHomepage() {
         });
     }
 
-    // CTA
     if (homepage) {
         setText('.cta-banner .cta-content h2', homepage.cta_heading);
         setText('.cta-banner .cta-content p', homepage.cta_text);
@@ -266,7 +259,7 @@ async function loadAboutPage() {
 }
 
 // ============================================
-// LEADERSHIP PAGE LOADER (FIXED bio toggle)
+// LEADERSHIP PAGE LOADER (FIXED bio toggle – using CSS class `open`)
 // ============================================
 
 async function loadLeadershipPage() {
@@ -289,10 +282,10 @@ async function loadLeadershipPage() {
                     <div class="profile-content">
                         <h3>${p.name}</h3>
                         <p><strong>${p.title}</strong></p>
-                        <button class="collapse-toggle" data-target="principalBio">
+                        <button class="collapse-toggle" aria-expanded="false">
                             <span class="toggle-icon">▶</span> Read Bio
                         </button>
-                        <div id="principalBio" class="collapse-content" style="display:none;">${simpleMarkdownToHTML(p.bio)}</div>
+                        <div class="collapse-content">${simpleMarkdownToHTML(p.bio)}</div>
                     </div>
                 </article>
                 <blockquote class="principal-quote">
@@ -315,10 +308,10 @@ async function loadLeadershipPage() {
                     <div class="profile-content">
                         <h3>${dep.name}</h3>
                         <p><strong>${dep.title}</strong></p>
-                        <button class="collapse-toggle" data-target="depBio-${idx}">
+                        <button class="collapse-toggle" aria-expanded="false">
                             <span class="toggle-icon">▶</span> Read Bio
                         </button>
-                        <div id="depBio-${idx}" class="collapse-content" style="display:none;">${simpleMarkdownToHTML(dep.bio)}</div>
+                        <div class="collapse-content">${simpleMarkdownToHTML(dep.bio)}</div>
                     </div>
                 </article>
             `).join('');
@@ -338,10 +331,10 @@ async function loadLeadershipPage() {
                     <div class="profile-content">
                         <h3>${b.name}</h3>
                         <p><strong>${b.title}</strong></p>
-                        <button class="collapse-toggle" data-target="bomBio">
+                        <button class="collapse-toggle" aria-expanded="false">
                             <span class="toggle-icon">▶</span> Read Message
                         </button>
-                        <div id="bomBio" class="collapse-content" style="display:none;">${simpleMarkdownToHTML(b.message)}</div>
+                        <div class="collapse-content">${simpleMarkdownToHTML(b.message)}</div>
                     </div>
                 </article>
             `;
@@ -398,20 +391,30 @@ async function loadLeadershipPage() {
         }
     }
 
-    // ---- Simplified bio toggle using event delegation ----
-    document.addEventListener('click', function(e) {
-        const btn = e.target.closest('.collapse-toggle');
-        if (!btn) return;
-        const targetId = btn.getAttribute('data-target');
-        const target = document.getElementById(targetId);
-        if (!target) return;
+    // ---- Toggle bios – attach listeners directly to each button ----
+    document.querySelectorAll('.collapse-toggle').forEach(btn => {
+        // Remove previous listeners by cloning (optional, but safe)
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
 
-        const isOpen = target.style.display === 'block';
-        target.style.display = isOpen ? 'none' : 'block';
-        const icon = btn.querySelector('.toggle-icon');
-        if (icon) {
-            icon.textContent = isOpen ? '▶' : '▼';
-        }
+        newBtn.addEventListener('click', function() {
+            // Find the sibling .collapse-content
+            const content = this.parentElement.querySelector('.collapse-content');
+            if (!content) return;
+
+            const isOpen = content.classList.contains('open');
+            if (isOpen) {
+                content.classList.remove('open');
+                this.setAttribute('aria-expanded', 'false');
+                const icon = this.querySelector('.toggle-icon');
+                if (icon) icon.textContent = '▶';
+            } else {
+                content.classList.add('open');
+                this.setAttribute('aria-expanded', 'true');
+                const icon = this.querySelector('.toggle-icon');
+                if (icon) icon.textContent = '▼';
+            }
+        });
     });
 }
 
