@@ -67,9 +67,9 @@ hods:
     icon: fa-calculator
     description: Building strong analytical skills through group discussion and peer
       teaching
-  - name: MR/MRS
+  - name: MRS.MUTUKU
     department: Sciences
-    photo: /images/uploads/whatsapp-image-2026-07-28-at-9.03.04-pm-1-.jpeg
+    photo: /images/uploads/1000245868.jpg
     icon: fa-flask
     description: Preparing students for STEM pathways including medicine and engineering
   - name: MRS.ODUOR
@@ -97,7 +97,7 @@ hods:
     photo: images/leadership/hod_guidance.jpg
     icon: fa-heart-circle-check
     description: Supporting student mental health and personal development
-  - name: Madam.
+  - name: MRS.NYAGA
     department: Library
     photo: /images/uploads/whatsapp-image-2026-07-28-at-9.03.04-pm.jpeg
     icon: fa-book-open
