@@ -259,7 +259,7 @@ async function loadAboutPage() {
 }
 
 // ============================================
-// LEADERSHIP PAGE LOADER (FIXED bio toggle with event delegation)
+// LEADERSHIP PAGE LOADER (BIO TOGGLE FIXED)
 // ============================================
 
 async function loadLeadershipPage() {
@@ -389,31 +389,6 @@ async function loadLeadershipPage() {
                 `;
             }).join('');
         }
-    }
-
-    // ---- Bio toggle using event delegation (fired once per page) ----
-    if (!window._collapseListenerAdded) {
-        document.addEventListener('click', function(e) {
-            const btn = e.target.closest('.collapse-toggle');
-            if (!btn) return;
-            const content = btn.parentElement.querySelector('.collapse-content');
-            if (!content) return;
-
-            const isOpen = content.classList.contains('open');
-            if (isOpen) {
-                content.classList.remove('open');
-                btn.setAttribute('aria-expanded', 'false');
-            } else {
-                content.classList.add('open');
-                btn.setAttribute('aria-expanded', 'true');
-            }
-            // Toggle icon arrow
-            const icon = btn.querySelector('.toggle-icon');
-            if (icon) {
-                icon.textContent = isOpen ? '▶' : '▼';
-            }
-        });
-        window._collapseListenerAdded = true;
     }
 }
 
@@ -715,4 +690,33 @@ document.addEventListener('DOMContentLoaded', async function() {
         case 'news': await loadNewsPage(); break;
     }
     console.log(`CMS: Content loaded for ${page} page`);
+});
+
+// ============================================
+// BIO TOGGLE (runs once, works for all dynamic content)
+// ============================================
+document.addEventListener('click', function(e) {
+    // Find the closest .collapse-toggle button
+    const btn = e.target.closest('.collapse-toggle');
+    if (!btn) return;
+
+    // Find the sibling .collapse-content div
+    const content = btn.parentElement.querySelector('.collapse-content');
+    if (!content) return;
+
+    // Toggle the 'open' class
+    const isOpen = content.classList.contains('open');
+    if (isOpen) {
+        content.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+    } else {
+        content.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+    }
+
+    // Flip the arrow icon
+    const icon = btn.querySelector('.toggle-icon');
+    if (icon) {
+        icon.textContent = isOpen ? '▶' : '▼';
+    }
 });
