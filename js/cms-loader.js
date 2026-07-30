@@ -45,8 +45,12 @@ function setImageSrc(selector, src) {
     if (src && src !== '') {
         el.src = src;
         el.style.display = 'block';
-        const placeholder = el.parentElement?.querySelector('.image-placeholder, .sub-hero-placeholder');
-        if (placeholder) placeholder.style.display = 'none';
+        // Hide ALL possible placeholder types near the image
+        const wrapper = el.parentElement;
+        if (wrapper) {
+            wrapper.querySelectorAll('.image-placeholder, .sub-hero-placeholder, .gallery-placeholder, .logo-placeholder, .footer-logo-placeholder, .loader-placeholder')
+                .forEach(p => p.style.display = 'none');
+        }
     }
 }
 
@@ -119,7 +123,7 @@ async function loadGlobalSettings() {
 }
 
 // ============================================
-// HOMEPAGE LOADER (UPDATED – uses restartHeroCarousel)
+// HOMEPAGE LOADER
 // ============================================
 
 async function loadHomepage() {
@@ -128,7 +132,6 @@ async function loadHomepage() {
     const testimonials = await fetchCMSData('/content/testimonials.yml');
     if (!settings) return;
 
-    // ---- Hero Carousel – update existing slides, then restart carousel ----
     if (settings.hero_images && settings.hero_images.length > 0) {
         const slides = document.querySelectorAll('#heroCarousel .carousel-slide');
         const bgSlides = document.querySelectorAll('.hero-backgrounds .hero-bg-slide');
@@ -149,7 +152,6 @@ async function loadHomepage() {
             }
         });
 
-        // Restart the hero carousel after content update
         if (typeof window.restartHeroCarousel === 'function') {
             window.restartHeroCarousel();
         }
@@ -259,7 +261,7 @@ async function loadAboutPage() {
 }
 
 // ============================================
-// LEADERSHIP PAGE LOADER (BIO TOGGLE FIXED)
+// LEADERSHIP PAGE LOADER (fixed bio toggle)
 // ============================================
 
 async function loadLeadershipPage() {
@@ -269,11 +271,17 @@ async function loadLeadershipPage() {
     setImageSrc('.sub-hero-image', data.hero_image);
     setText('.sub-hero-subtitle', data.hero_subtitle);
 
+    // Helper to create unique IDs
+    function uid(prefix, index) {
+        return prefix + '-' + index;
+    }
+
     // Principal
     if (data.principal) {
         const p = data.principal;
         const container = document.getElementById('principal-container');
         if (container) {
+            const bioId = uid('principalBio', 0);
             container.innerHTML = `
                 <article class="profile-card principal-card">
                     <div class="profile-image-wrap">
@@ -282,10 +290,10 @@ async function loadLeadershipPage() {
                     <div class="profile-content">
                         <h3>${p.name}</h3>
                         <p><strong>${p.title}</strong></p>
-                        <button class="collapse-toggle" aria-expanded="false">
+                        <button class="collapse-toggle" aria-expanded="false" aria-controls="${bioId}">
                             <span class="toggle-icon">▶</span> Read Bio
                         </button>
-                        <div class="collapse-content">${simpleMarkdownToHTML(p.bio)}</div>
+                        <div id="${bioId}" class="collapse-content">${simpleMarkdownToHTML(p.bio)}</div>
                     </div>
                 </article>
                 <blockquote class="principal-quote">
@@ -300,7 +308,9 @@ async function loadLeadershipPage() {
     if (data.deputies && data.deputies.length > 0) {
         const grid = document.getElementById('deputies-container');
         if (grid) {
-            grid.innerHTML = data.deputies.map((dep, idx) => `
+            grid.innerHTML = data.deputies.map((dep, idx) => {
+                const bioId = uid('depBio', idx);
+                return `
                 <article class="profile-card deputy-card">
                     <div class="profile-image-wrap">
                         <img src="${dep.photo || ''}" alt="${dep.name}" class="profile-image" />
@@ -308,13 +318,14 @@ async function loadLeadershipPage() {
                     <div class="profile-content">
                         <h3>${dep.name}</h3>
                         <p><strong>${dep.title}</strong></p>
-                        <button class="collapse-toggle" aria-expanded="false">
+                        <button class="collapse-toggle" aria-expanded="false" aria-controls="${bioId}">
                             <span class="toggle-icon">▶</span> Read Bio
                         </button>
-                        <div class="collapse-content">${simpleMarkdownToHTML(dep.bio)}</div>
+                        <div id="${bioId}" class="collapse-content">${simpleMarkdownToHTML(dep.bio)}</div>
                     </div>
                 </article>
-            `).join('');
+                `;
+            }).join('');
         }
     }
 
@@ -323,6 +334,7 @@ async function loadLeadershipPage() {
         const b = data.bom_chair;
         const container = document.getElementById('bom-container');
         if (container) {
+            const bioId = uid('bomBio', 0);
             container.innerHTML = `
                 <article class="profile-card">
                     <div class="profile-image-wrap">
@@ -331,10 +343,10 @@ async function loadLeadershipPage() {
                     <div class="profile-content">
                         <h3>${b.name}</h3>
                         <p><strong>${b.title}</strong></p>
-                        <button class="collapse-toggle" aria-expanded="false">
+                        <button class="collapse-toggle" aria-expanded="false" aria-controls="${bioId}">
                             <span class="toggle-icon">▶</span> Read Message
                         </button>
-                        <div class="collapse-content">${simpleMarkdownToHTML(b.message)}</div>
+                        <div id="${bioId}" class="collapse-content">${simpleMarkdownToHTML(b.message)}</div>
                     </div>
                 </article>
             `;
@@ -693,18 +705,18 @@ document.addEventListener('DOMContentLoaded', async function() {
 });
 
 // ============================================
-// BIO TOGGLE (runs once, works for all dynamic content)
+// BIO TOGGLE – works for all dynamically added buttons
 // ============================================
 document.addEventListener('click', function(e) {
-    // Find the closest .collapse-toggle button
     const btn = e.target.closest('.collapse-toggle');
     if (!btn) return;
 
-    // Find the sibling .collapse-content div
-    const content = btn.parentElement.querySelector('.collapse-content');
+    const targetId = btn.getAttribute('aria-controls');
+    if (!targetId) return;
+
+    const content = document.getElementById(targetId);
     if (!content) return;
 
-    // Toggle the 'open' class
     const isOpen = content.classList.contains('open');
     if (isOpen) {
         content.classList.remove('open');
@@ -714,7 +726,6 @@ document.addEventListener('click', function(e) {
         btn.setAttribute('aria-expanded', 'true');
     }
 
-    // Flip the arrow icon
     const icon = btn.querySelector('.toggle-icon');
     if (icon) {
         icon.textContent = isOpen ? '▶' : '▼';
