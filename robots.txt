@@ -1,4 +1,5 @@
 User-agent: *
+
 Allow: /
 
-Sitemap: https://YOUR_DOMAIN_HERE/sitemap.xml
+Sitemap: https://mavokoboys.sc.ke/sitemap.xml
